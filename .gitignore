@@ -8,6 +8,7 @@
 /.vagrant/
 Vagrantfile.local
 vagrant
+*.box
 /docs/_build/
 /db.sqlite3
 /apps/
