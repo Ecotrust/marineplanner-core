@@ -15,16 +15,18 @@ def theme_query():
         select={
             'layer_count': "SELECT COUNT(*) FROM data_manager_layer_themes as mm LEFT JOIN data_manager_layer as l ON mm.layer_id = l.id WHERE mm.theme_id = data_manager_theme.id AND l.layer_type != 'placeholder'"
         }
-    ).order_by('display_name')
+    ).order_by('order')
 
 def theme(request, theme_slug):
 
     theme = get_object_or_404(theme_query(), name=theme_slug)
     template = 'data_catalog/theme.html'
 
-    layers = theme.layer_set.exclude(layer_type='placeholder').order_by('name').select_related('parent')
-
+    layers = theme.layer_set.all().exclude(layer_type='placeholder').exclude(is_sublayer=True).order_by('order')
+    sub_layers = theme.layer_set.all().exclude(layer_type='placeholder').exclude(is_sublayer=False).order_by('order')
+                          
     return render_to_response(template, RequestContext(request, {
         'theme': theme,
         'layers': layers,
+        'sub_layers': sub_layers,
     }));

@@ -16,6 +16,11 @@
     <div class="layer-list">
       {% for layer in layers %}
         {% include "data_catalog/includes/layer_info.html" %}
+        {% for sublayer in sub_layers %}
+          {% if sublayer.parent.name == layer.name %}
+            {% include "data_catalog/includes/layer_info.html" with layer=sublayer %}
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     </div>
   {% endif %}

@@ -57,13 +57,15 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
 
 * **Shortcuts**
   * To use `/manage.py` with normal django administrative tasks , use the keyword `dj` 
-     ```
-     dj makemigrations
-     dj migrate
-     dj dumpdata
-     etc.
-     ```
-  * Typing `djrun` will run your dev server - remember to add your sample data first (see below):
+
+      ```
+      dj makemigrations
+      dj migrate
+      dj dumpdata
+      etc.
+      ```
+      
+  * Typing `djrun` will run your dev server - remember to add your sample data first (see #5):
   
 
 *  **NOTE:** The provisioning script is designed for a fresh install and will completely wipe the database and any associated content - IF you decide to shutdown/halt your VM! Anytime `vagrant up` or `vagrant provision` is run, the provisioning script will re-run. Adding the flag `--no-provision` to `vagrant up` will ignore the script.
