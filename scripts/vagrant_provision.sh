@@ -54,6 +54,13 @@ $PYTHON $PROJECT_DIR/$APP_NAME/manage.py update_index
 echo "loading dev fixture data"
 $PYTHON $PROJECT_DIR/$APP_NAME/manage.py loaddata dev_fixture.json
 
+#Collect static
+echo "collect initial static"
+$PYTHON $PROJECT_DIR/$APP_NAME/manage.py collectstatic -l -i "*.scss"
+rm -rf $PROJECT_DIR/static/modules
+
+
+
 # Add a couple of aliases to manage.py into .bashrc
 cat << EOF >> ~/.bashrc
 alias dj="$PYTHON $PROJECT_DIR/$APP_NAME/manage.py"
