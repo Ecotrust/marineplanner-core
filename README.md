@@ -5,11 +5,11 @@
 #### ~Development Installation
 
 ##### Initial Setup using Vagrant:
-The following is the **_recommended_** folder structure for the **entire** MARCO project and the customized provisioning script is inherently dependent on it. Altering the folder and naming structure will require modifications to the provisioning script, so please be aware! The provisioning script is designed to be a **one-step** install after initial setup. 
+The following is the **_recommended_** folder structure for the **entire** MARCO project and the customized provisioning script is inherently dependent on it. Altering the folder and naming structure will require modifications to the provisioning script, so please be aware! The provisioning script is designed to be a **one-step** install after initial setup.
 
 ```
   -- marco-portal2
-    -- apps (all remaining repositories within MidAtlanticPortal) 
+    -- apps (all remaining repositories within MidAtlanticPortal)
       -- mardona-analysistools
       -- madrona-features
       -- etc.
@@ -27,18 +27,18 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
       curl -s https://api.github.com/orgs/MidAtlanticPortal/repos\?per_page\=200 | perl -ne 'print "$1\n" if (/"ssh_url": "([^"]+)/)' | xargs -n 1 git clone
       ```
 
-2.  Once your folder structure is setup, create a *config.ini* file by following the general outline in `config.ini.template` and modify the following for use with vagrant
-      * **MEDIA_URL:** /home/vagrant/marco_portal2/media
-      * **STATIC_URL:** /home/vagrant/marco_porta2/static
+2.  Once your folder structure is setup, create a `config.ini` file by following the general outline in `config.ini.template` and modify the following for use with vagrant
+      * **MEDIA_ROOT:** /home/vagrant/marco_portal2/media
+      * **STATIC_ROOT:** /home/vagrant/marco_porta2/static
       * **[DATABASE] USER:** vagrant
       * **[DATABASE] PASSWORD:** [remove entirely]
 
 3. Download and install the neccessary [bower_components](http://portal.midatlanticocean.org/static/bower_components.tar.gz) within your `/static/` directory
 
-4. Retrieve the media folder via ssh at `/webapps/marco_portal_media/` and add it to your `/media/` path defined in `config.ini` 
-    * Of note - you may want to exclude the data_manager folder unless you're interested in several GBs of utfgrid layers. 
+4. Retrieve the media folder via ssh at `/webapps/marco_portal_media/` and add it to your `/media/` path defined in `config.ini`
+    * Of note - you may want to exclude the `data_manager` folder unless you're interested in several GBs of utfgrid layers.
 
-5. Retrieve the data & content fixture from `/fixture/dev_fixture.json` via ssh and place it at the root level of `marco-portal2`
+5. Retrieve the data & content fixture from `/fixtures/dev_fixture.json` via ssh and place it at the root level of `marco-portal2`
 
 6. Download and install [vagrant](https://www.vagrantup.com/downloads.html) and [virtual box](https://www.virtualbox.org/wiki/Downloads) (if you haven't already done so already)
 
@@ -56,7 +56,7 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
 
 
 * **Shortcuts**
-  * To use `/manage.py` with normal django administrative tasks , use the keyword `dj` 
+  * To use `/manage.py` with normal django administrative tasks , use the keyword `dj`
 
       ```
       dj makemigrations
@@ -64,9 +64,9 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
       dj dumpdata
       etc.
       ```
-      
+
   * Typing `djrun` will run your dev server - remember to add your sample data first (see #5):
-  
+
 
 *  **NOTE:** The provisioning script is designed for a fresh install and will completely wipe the database and any associated content - IF you decide to shutdown/halt your VM! Anytime `vagrant up` or `vagrant provision` is run, the provisioning script will re-run. Adding the flag `--no-provision` to `vagrant up` will ignore the script.
 
@@ -76,11 +76,11 @@ If you decide to use pgAdmin3 for database management rather than using the comm
   ```
   sudo nano /etc/postgresql/9.3/main/postgresql.conf
   listen_addresses = '*'
-  ```      
+  ```
 
 * Enter into `pg_hba.conf` and add the `host` line:
   ```
-   sudo nano /etc/postgresql/9.3/main/pg_hba.conf 
+   sudo nano /etc/postgresql/9.3/main/pg_hba.conf
    host    all    all    10.0.0.0/16     md5
   ```
 
@@ -101,9 +101,9 @@ If you decide to use pgAdmin3 for database management rather than using the comm
 
 ### Putting site into maintenance mode
 
-In the webfaction interface, remove the 'marco_portal2' app at `/` and replace 
+In the webfaction interface, remove the 'marco_portal2' app at `/` and replace
 with the maintenance page. Takes about 60 seconds to activate. Test out (http://midatlantic.point97.io)[http://midatlantic.point97.io]
-to confirm. 
+to confirm.
 
 ### Dependencies
 
