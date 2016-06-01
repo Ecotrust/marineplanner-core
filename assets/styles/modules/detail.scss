@@ -200,7 +200,7 @@ body.story-page .detail .media-item .media-body .item-text {
     height: auto;
     .rich-text {
     	ul, ol { 
-    		word-break: word-break;
+    		word-break: break-word;
     		li { padding-bottom: 5px; }
     	}
     }
