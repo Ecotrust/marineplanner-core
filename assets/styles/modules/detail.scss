@@ -198,4 +198,10 @@ $hover-background-color: $gray-medium-light;
 
 body.story-page .detail .media-item .media-body .item-text {
     height: auto;
+    rich-text {
+    	ul, ol { 
+    		word-break: word-break;
+    		li { padding-bottom: 5px; }
+    	}
+    }
 }
