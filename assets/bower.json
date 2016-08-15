@@ -1,7 +1,7 @@
 {
   "name": "marco-portal-static",
   "dependencies": {
-    "font-awesome": "~4.2.0",
+    "font-awesome": "*",
     "knockout": "~v2.1.0",
     "knockout-mapping": "~v2.3.5",
     "amplify": "~1.1.0",
