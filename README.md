@@ -51,6 +51,8 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
 
 9. At this point, you should be completely setup!
 
+10. You probably want to create a superuser once you're in your VM, so that you have access to both the Django and Wagtail backend
+
 ##### Using Vagrant
 * Access your VM by running `vagrant ssh`. This will automatically log you into your virtual machine with your virtual environment activated at the project root level.
 
@@ -61,6 +63,7 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
       ```
       dj makemigrations
       dj migrate
+      dj createsuperuser
       dj dumpdata
       etc.
       ```
