@@ -1,0 +1,13 @@
+{
+  "name": "pointer_events_polyfill",
+  "homepage": "https://github.com/kmewhort/pointer_events_polyfill",
+  "_release": "90cab8896b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "90cab8896bd4c23a9da74886cf9147a115ede52b"
+  },
+  "_source": "https://github.com/kmewhort/pointer_events_polyfill.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/kmewhort/pointer_events_polyfill.git"
+}
