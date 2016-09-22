@@ -32,7 +32,7 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
 
 3. Create a `/static/` directory at the root level and move the `/bower_components/` directory (also found at the root level) within it
 
-4. Retrieve the media folder via ssh/sftp at `/webapps/marco_portal_media/` and add it to your `/media/` path - most likely `marco-portal2/media/`. Refer to your team's technical documentation on server login (username and password) credentials
+4. Create a `/media/` directory at the root level and retrieve the live server's media folder via ssh/sftp located at `/webapps/marco_portal_media/` and add it to the `/media/` path. Refer to your team's technical documentation for server login (username and password) credentials
     * Of note - you may want to exclude the `data_manager` folder within the media directory - unless you're interested in several GBs of utfgrid layers.
 
 5. Retrieve the data & content fixture from `/fixtures/dev_fixture.json` via ssh/sftp and place it at the root level of `marco-portal2`
