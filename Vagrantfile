@@ -3,8 +3,8 @@
 
 Vagrant::Config.run do |config|
     # Base box to build off, and download URL for when it doesn't exist on the user's system already
-    config.vm.box = "p97-base-v0.4"
-    config.vm.box_url = "http://downloads.point97.io/p97-base-v0.4.box"
+    config.vm.box = "marco-base-v0.4"
+    config.vm.box_url = "http://portal.midatlanticocean.org/static/vagrant_boxes/p97-base-v0.4.box"
 
     # Forward a port from the guest to the host, which allows for outside
     # computers to access the VM, whereas host only networking does not.

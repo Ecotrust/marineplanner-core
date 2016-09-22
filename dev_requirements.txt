@@ -1,5 +1,6 @@
 # Minimal requirements
 Django<1.8
+djangorestframework==3.3.2
 
 # django-compressor scss hack
 -e git+https://github.com/MidAtlanticPortal/django-libsass.git@master#egg=django_libsass
@@ -26,7 +27,7 @@ django-celery==3.1.16
 django-celery-email==1.1.1
 kombu==3.0.33
 
-requests==2.5.1 
+requests==2.5.1
 
 django-apptemplates==0.0.1
 

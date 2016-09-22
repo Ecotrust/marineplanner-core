@@ -56,13 +56,8 @@ $PYTHON $PROJECT_DIR/$APP_NAME/manage.py loaddata dev_fixture.json
 
 #Collect static
 echo "collect initial static"
-$PYTHON $PROJECT_DIR/$APP_NAME/manage.py collectstatic -l -i "*.scss"
+yes yes | $PYTHON $PROJECT_DIR/$APP_NAME/manage.py collectstatic
 rm -rf $PROJECT_DIR/static/modules
-
-#create superuser
-echo "creating superuser"
-$PYTHON $PROJECT_DIR/$APP_NAME/manage.py createsuperuser
-
 
 # Add a couple of aliases to manage.py into .bashrc
 cat << EOF >> ~/.bashrc
