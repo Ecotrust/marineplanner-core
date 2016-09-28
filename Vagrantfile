@@ -6,6 +6,13 @@ Vagrant::Config.run do |config|
     config.vm.box = "marco-base-v0.4"
     config.vm.box_url = "http://portal.midatlanticocean.org/static/vagrant_boxes/p97-base-v0.4.box"
 
+    #Enforce provisioning of 5GB of RAM - required for running MARCO properly
+    #If you don't have 5 GB, you can drop the memory value, or comment everything out completely.
+    config.vm.customize [
+      "modifyvm", :id,
+      "--memory", "5120"
+    ]
+
     # Forward a port from the guest to the host, which allows for outside
     # computers to access the VM, whereas host only networking does not.
     config.vm.forward_port 8000, 8111
