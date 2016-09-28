@@ -6,8 +6,6 @@ $navbar-default-link-active-bg:    $white;
 
 $navbar-default-link-hover-color: darken($navbar-default-link-color, 15%);
 
-@import "../../bootstrap/stylesheets/bootstrap/navbar";
-
 header {
     padding-bottom: $navbar-height;
 }

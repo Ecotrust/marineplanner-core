@@ -1,15 +1,17 @@
-@import "../../bootstrap/stylesheets/bootstrap/glyphicons";
-@import "../../icomoon/style.css";
-
 [class^="icon-"], [class*=" icon-"] {
   display: inline-block;
-  @include scale(1.5);
-
+  -webkit-transform: scale(1.5);
+      -ms-transform: scale(1.5); // IE9 only
+       -o-transform: scale(1.5);
+          transform: scale(1.5);
   width: 1em;
 }
   
 .oversized {
   display: inline-block;
-  @include scale(2.0);
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2); // IE9 only
+       -o-transform: scale(2);
+          transform: scale(2);
   width: 1.3em;
 }

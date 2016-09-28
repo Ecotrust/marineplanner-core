@@ -1,23 +1,26 @@
 // Core variables and mixins
 @import "variables";
-@import "mixins";
 
-@import "../bootstrap/stylesheets/bootstrap/variables";
-@import "../bootstrap/stylesheets/bootstrap/mixins";
-
-
-// Reset and dependencies
-@import "../bootstrap/stylesheets/bootstrap/normalize";
-@import "../bootstrap/stylesheets/bootstrap/print";
 @import "modules/icons";
 
 // Core CSS
+// Core variables and mixins
+@import "../bootstrap/stylesheets/bootstrap/normalize";
+@import "../bootstrap/stylesheets/bootstrap/variables";
+@import "../bootstrap/stylesheets/bootstrap/mixins";
+@import "../bootstrap/stylesheets/bootstrap/mixins/_vendor-prefixes.scss";
+@import "../bootstrap/stylesheets/bootstrap/print";
+@import "../bootstrap/stylesheets/bootstrap/glyphicons";
+@import "../bootstrap/stylesheets/bootstrap/forms";
+@import "../bootstrap/stylesheets/bootstrap/navbar";
 @import "../bootstrap/stylesheets/bootstrap/scaffolding";
 @import "../bootstrap/stylesheets/bootstrap/type";
 /* @import "bootstrap/code"; */
 @import "../bootstrap/stylesheets/bootstrap/grid";
 @import "../bootstrap/stylesheets/bootstrap/tables";
 @import "../bootstrap/stylesheets/bootstrap/forms";
+@import "../bootstrap/stylesheets/bootstrap/buttons";
+@import "../bootstrap/stylesheets/bootstrap/tooltip";
 
 @import "modules/buttons";
 
@@ -81,8 +84,12 @@
 
 
 /* ***********************
-    Move to new file later.
+    Maybe move to new file later.
    *********************** */
+
+.text-block {
+  width: 3%*100/4;
+}
 
 /* Drop-down menu cursor */
 .dropdown-menu > li > a {
