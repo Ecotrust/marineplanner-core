@@ -26,7 +26,7 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
     curl -s https://api.github.com/orgs/MidAtlanticPortal/repos\?per_page\=200 | perl -ne 'print "$1\n" if (/"clone_url": "([^"]+)/)' | xargs -n 1 git clone
     ```
 
-2.  Once your folder structure is setup, create a `config.ini` file by making a copy of the `config.ini.template` located at `marco-portal2/marco` and modify the following
+2.  Once your folder structure is set up, create a `config.ini` file by making a copy of the `config.ini.template` located at `marco-portal2/marco` and modify the following
       * **MEDIA_ROOT:** /home/vagrant/marco_portal2/media
       * **STATIC_ROOT:** /home/vagrant/marco_portal2/static
 
@@ -39,16 +39,11 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
 
 6. Download and install [vagrant](https://www.vagrantup.com/downloads.html) and [virtual box](https://www.virtualbox.org/wiki/Downloads) (if you haven't already done so already)
 
-7. Install the vagrant-faster plugin - which helps to allocate/estimate the best resources based on your computer
-   ```
-   vagrant plugin install vagrant-faster
-   ```
+7. At the root of `marco-portal2`, run `vagrant up` and let it install ALL of dependencies MARCO relies upon
 
-8. At the root of `marco-portal2`, run `vagrant up` and let it install ALL of dependencies MARCO relies upon
+8. At this point, you should be completely setup!
 
-9. At this point, you should be completely setup!
-
-10. You probably want to create a superuser once you're in your VM, so that you have access to both the Django and Wagtail backend
+9. You probably want to create a superuser once you're in your VM, so that you have access to both the Django and Wagtail backend
 
 ##### Using Vagrant
 * Access your VM by running `vagrant ssh`. This will automatically log you into your virtual machine with your virtual environment activated at the project root level.
@@ -68,7 +63,7 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
   * Typing `djrun` will run your dev server - remember to add your sample data first (see #5):
 
 
-*  **NOTE:** The provisioning script is designed for a fresh install and will completely wipe the database and any associated content - IF you decide to shutdown/halt your VM! Anytime `vagrant up` or `vagrant provision` is run, the provisioning script will re-run. Adding the flag `--no-provision` to `vagrant up` will ignore the script.
+*  **NOTE:** The provisioning script is designed for a fresh install and will completely wipe the database and any associated content - IF you decide to shutdown your VM! Outside of halting your vagrant machine, running `vagrant up` or `vagrant provision` will cause the provisioning script to re-run. Adding the flag `--no-provision` to `vagrant up` will ignore the script.
 
 #### **** OPTIONAL ***
 If you decide to use pgAdmin3 for database management rather than using the command line, you'll need to allow/enable access to your virtual machine.
