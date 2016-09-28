@@ -2,7 +2,7 @@
 
 ### This is the top level project for the Mid-Atlantic Ocean Data Portal
 
-#### ~Development Installation
+### ~Development Installation
 
 ##### Initial Setup using Vagrant:
 The following is the **_recommended_** folder structure for the **entire** MARCO project and the customized provisioning script is inherently dependent on it. Altering the folder and naming structure will require modifications to the provisioning script, so please be aware! The provisioning script is designed to be a **one-step** install after initial setup.
@@ -70,7 +70,7 @@ The following is the **_recommended_** folder structure for the **entire** MARCO
 
 *  **NOTE:** The provisioning script is designed for a fresh install and will completely wipe the database and any associated content - IF you decide to shutdown/halt your VM! Anytime `vagrant up` or `vagrant provision` is run, the provisioning script will re-run. Adding the flag `--no-provision` to `vagrant up` will ignore the script.
 
-##### OPTIONAL
+#### **** OPTIONAL ***
 If you decide to use pgAdmin3 for database management rather than using the command line, you'll need to allow/enable access to your virtual machine.
 *  Enter into `postgres.conf` and change `listen_addresses`:
   ```
@@ -96,3 +96,17 @@ If you decide to use pgAdmin3 for database management rather than using the comm
      *  **Username:** vagrant
 
 
+### ~Code Deployment
+Since this project is modularized, changes to a submodule only requires server updates to that specific submodule - rather than the entire code base.
+
+1.  SSH into the server
+2.  Activate your virtual env - `source ~/env/marco_portal2/bin/activate`
+3.  Navigate to the submodule that you're updating
+    *  Submodules are located at `cd /home/midatlantic/env/marco_portal2/src/[THE-NAME-OF-YOUR-SUBMODULE]`
+4.  Once you're at that path - `git fetch && git reset -q --hard origin/master` 
+    *  `origin/master` pertains to the main master branch - you can change that to whatever your branch you'd like
+    *  Of note, the master *marco-portal2* branch runs as `origin/prototype`
+5.  Navigate to `cd ~/webapps/marco_portal/marco`
+6.  Run `python manage.py collecstatic` to collect all the neccessary static (js/css) files
+7.  Run `python manage.py compress` to compress
+8.  Restart the server - `~/webapps/marco_portal/apache2/bin/restart`
