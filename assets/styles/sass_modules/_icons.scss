@@ -1,8 +1,26 @@
+[class^="icon-"], [class*=" icon-"] {
+  display: inline-block;
+  -webkit-transform: scale(1.5);
+      -ms-transform: scale(1.5); // IE9 only
+       -o-transform: scale(1.5);
+          transform: scale(1.5);
+  width: 1em;
+}
+  
+.oversized {
+  display: inline-block;
+  -webkit-transform: scale(2);
+      -ms-transform: scale(2); // IE9 only
+       -o-transform: scale(2);
+          transform: scale(2);
+  width: 1.3em;
+}
+
 /* Custom dingbat font from fontello */
 
 @font-face {
   font-family: 'a';
-  src: url('../../fonts/a.woff') format('woff');
+  src: url('../fonts/icon-font/font/a.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
