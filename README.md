@@ -102,6 +102,8 @@ Since this project is modularized, changes to a submodule only requires server u
     *  `origin/master` pertains to the main master branch - you can change that to whatever your branch you'd like
     *  Of note, the master *marco-portal2* branch runs as `origin/prototype`
 5.  Navigate to `cd ~/webapps/marco_portal/marco`
-6.  Run `python manage.py collecstatic` to collect all the neccessary static (js/css) files
+6.  Run `python manage.py collecstatic` to collect all the neccessary static (js/css) files 
+    * you can use the -i flag to ignore utfgrids in the rare chance that those files seems to be "collecting" 
+    * `python manage.py collecstatic -i utfgrid`
 7.  Run `python manage.py compress` to compress
 8.  Restart the server - `~/webapps/marco_portal/apache2/bin/restart`
