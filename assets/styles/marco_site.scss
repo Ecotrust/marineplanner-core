@@ -4,6 +4,7 @@
 
 // Core CSS
 // Core variables and mixins
+@import "../bootstrap/stylesheets/bootstrap/normalize";
 @import "../bootstrap/stylesheets/bootstrap/variables";
 @import "../bootstrap/stylesheets/bootstrap/mixins";
 @import "../bootstrap/stylesheets/bootstrap/mixins/_vendor-prefixes.scss";
@@ -50,7 +51,6 @@
 // Utility classes
 @import "../bootstrap/stylesheets/bootstrap/utilities";
 @import "../bootstrap/stylesheets/bootstrap/responsive-utilities";
-@import "../bootstrap/stylesheets/bootstrap/normalize";
 
 
 // @import "icons";

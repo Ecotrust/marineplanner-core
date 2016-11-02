@@ -62,6 +62,8 @@ INSTALLED_APPS = (
     'modelcluster',
     'rpc4django',
 
+    'captcha',
+
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
     'wagtail.wagtaildocs',
@@ -373,6 +375,9 @@ GA_ACCOUNT = cfg.get('APP', 'GA_ACCOUNT', '')
 
 ADMINS = (('KSDev', 'ksdev@ecotrust.org'),)
 
+NOCAPTCHA = True
+RECAPTCHA_PUBLIC_KEY = '6LevfQoUAAAAAPIKTQHJt3_Y2NDXkZQ3HYQHDNHk'
+RECAPTCHA_PRIVATE_KEY = '6LevfQoUAAAAACp-4BPAgx4oMgeJrn1d9IMyReoI'
 
 if False:
     MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
