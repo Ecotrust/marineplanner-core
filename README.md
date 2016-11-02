@@ -107,3 +107,31 @@ Since this project is modularized, changes to a submodule only requires server u
     * `python manage.py collectstatic -i utfgrid`
 7.  Run `python manage.py compress` to compress
 8.  Restart the server - `~/webapps/marco_portal/apache2/bin/restart`
+
+### ~Adding a new module to the apps directory and deployment
+Adding a new module to marco requires a few additional steps for both local/development setup and deployment.
+
+**Local/Development setup**:  
+
+1. create directory within `marco-portal2/apps`
+    * Use `git clone` for exisiting module or create a new direcotry and use `git init` to set up your new repository.
+        * If this is a new git repository create a new remote origin repo within the [MidAtlanticPortal](https://github.com/MidAtlanticPortal) orgainization. *Next steps assume your new module is ready to use.*
+2. open `marco-portal2/requirements.txt` and add the newly created git remote repository (*e.g.* `-e git+https://github.com/MidAtlanticPortal/your_new_repo.git@master#egg=an_alias`). *the `@master#egg=` assigns an alias (simple name) for your module*
+3. open `marco-portal2/marco/marco/settings.py` and add your new module's alias as an `INSTALLED_APPS`. (*e.g.*, `INSTALLED_APPS = [ 'an_alias']`)
+4. run `vagrant provision`
+
+
+**Deployment**:  
+
+1. ssh into the server (sandbox or production)
+2. activate your virtual env - `source ~/env/marco_portal2/bin/activate`
+3. navigate to the submodule directory `cd /home/midatlantic/env/marco_portal2/src/`
+4. `git clone` your new module repository
+5. navigate to the marco-portal repo `cd ~/code/marco_portal2/prototype/`
+6. run `git fetch && git reset -q --hard origin/prototype`
+7. open the `requirements.txt` file and copy the line you added for your repo (*e.g.*, `-e git+https://github.com/MidAtlanticPortal/new_repo.git@master#egg=an_alias`)
+8. enter `pip install` and paste (*e.g.*,`pip install -e git+https://github.com/MidAtlanticPortal/new_repo.git@master#egg=an_alias` ) and run
+9. navigate to `cd ~/webapps/marco_portal/marco`
+10. run `python manage.py collectstatic -i utfgrid`
+11. run `python manage.py compress`
+12. restart the server - `~/webapps/marco_portal/apache2/bin/restart`  
