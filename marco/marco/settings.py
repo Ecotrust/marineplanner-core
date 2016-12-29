@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'taggit',
     'modelcluster',
     'rpc4django',
+    'tinymce',
 
     'captcha',
 
