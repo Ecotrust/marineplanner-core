@@ -381,7 +381,13 @@
 	        // extent: [-13884991, 2870341, -7455066, 6338219],
 	        source: new ol.source.TileWMS( ({
 	          url: l.url,
-	          params: {'LAYERS': l.arcgis_layers, 'TILED': true}
+	          params: {
+	          	'LAYERS': l.arcgis_layers, 
+	          	'TILED': true, 
+	          	'F':'image', 
+	          	'FORMAT':'png', 
+	          	'SIZE': '256,256'
+	          }
 	        }))
 	      })
 	    },
