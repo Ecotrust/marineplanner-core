@@ -318,7 +318,7 @@
 	    }),
 	    "Nautical Charts": new ol.layer.Tile({
 	      source: new ol.source.TileWMS({
-	        url: "http://egisws02.nos.noaa.gov/ArcGIS/services/RNC/NOAA_RNC/ImageServer/WMSServer",
+	        url: "https://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/ImageServer/exportImage",
 	        maxZoom: 13,
 	        projection: "EPSG:3857",
 	      }),
