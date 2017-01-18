@@ -321,7 +321,6 @@
 	        url: "http://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/ImageServer/exportImage",
 	        // projection: "EPSG:3857",
 	        params: {
-          		'LAYERS': l.arcgis_layers, 
           		'TILED': true, 
           		'F':'image', 
           		'FORMAT':'png', 
