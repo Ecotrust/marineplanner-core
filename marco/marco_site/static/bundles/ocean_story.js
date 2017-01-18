@@ -318,9 +318,15 @@
 	    }),
 	    "Nautical Charts": new ol.layer.Tile({
 	      source: new ol.source.TileWMS({
-	        url: "https://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/ImageServer/exportImage",
-	        maxZoom: 13,
-	        projection: "EPSG:3857",
+	        url: "http://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC/ImageServer/exportImage",
+	        // projection: "EPSG:3857",
+	        params: {
+          		'LAYERS': l.arcgis_layers, 
+          		'TILED': true, 
+          		'F':'image', 
+          		'FORMAT':'png', 
+          		'SIZE': '256,256'
+          	}
 	      }),
 	      visible: false,
 	    }),
