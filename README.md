@@ -4,6 +4,15 @@
 
 ### ~Development Installation
 
+##### Creating a new app from scratch:
+The steps below are great if you've already created your django project folder and customized the scripts to use it. Going forward, we cannot make these assumptions. The following steps in this section will walk you through this setup.
+
+TODO: create a template project to be renamed and acted upon by the provisioning script
+
+1. Rename your template project and app module
+2. Update settings.py with your new db name
+2. Update scripts/vagrant_provision.sh to match your new project, app, and db names
+
 ##### Initial Setup using Vagrant:
 The following is the **_recommended_** folder structure for an **entire** Marine Planner project with all associated apps and the customized provisioning script is inherently dependent on it. Altering the folder and naming structure will require modifications to the provisioning script, so please be aware! The provisioning script is designed to be a **one-step** install after initial setup.
 
@@ -14,7 +23,6 @@ The following is the **_recommended_** folder structure for an **entire** Marine
       -- madrona-features
       -- etc.
 ```
-
 
 1.  To quickly clone all of the module repositiories, do the following:
   * create a directory (like 'apps' above) directly inside marineplanner-core
@@ -42,7 +50,6 @@ The following is the **_recommended_** folder structure for an **entire** Marine
 
 ##### Using Vagrant
 * Access your VM by running `vagrant ssh`. This will automatically log you into your virtual machine with your virtual environment activated at the project root level.
-
 
 * **Shortcuts**
   * To use `/manage.py` with normal django administrative tasks , use the keyword `dj`
