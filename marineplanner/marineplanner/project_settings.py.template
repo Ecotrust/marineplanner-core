@@ -1,3 +1,6 @@
+import sys
+globals().update(vars(sys.modules['marineplanner.settings']))
+
 INSTALLED_APPS += [
 
 ]
