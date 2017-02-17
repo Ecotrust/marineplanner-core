@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'marineplanner',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -76,10 +79,20 @@ WSGI_APPLICATION = 'marineplanner.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'marineplanner',
+        'USER': 'ubuntu',
+        'HOST': 'localhost',
+        'PASSWORD': 'SetInProjectSettings123!',
+        'PORT': 5432,
     }
 }
+
+# default = {
+#     'ENGINE': cfg.get('DATABASE', 'ENGINE',
+#                       'django.contrib.gis.db.backends.postgis'),
+# }
 
 
 # Password validation
@@ -120,10 +133,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-import django
-django.setup()
-
 try:
     from marineplanner.project_settings import *
 except ImportError:
     pass
+
+
+# This seems to help with some backward compatibility
+import django
+django.setup()
