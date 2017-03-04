@@ -89,12 +89,6 @@ DATABASES = {
     }
 }
 
-# default = {
-#     'ENGINE': cfg.get('DATABASE', 'ENGINE',
-#                       'django.contrib.gis.db.backends.postgis'),
-# }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -132,6 +126,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+### Django compressor (mp-visualize/base.html)
+COMPRESS_DEBUG_TOGGLE = None
+COMPRESS_ENABLED = False
+COMPRESS_PRECOMPILERS = ()
 
 try:
     from marineplanner.project_settings import *
