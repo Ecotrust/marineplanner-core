@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^visualize/', include('visualize.urls')),
     url(r'^account/auth/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^account/', include('accounts.urls', namespace="account")),
+    url(r'^data_manager/', include('data_manager.urls', namespace="data_manager")),
     url('', include('core.urls')),
 ]

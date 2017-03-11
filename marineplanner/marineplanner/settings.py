@@ -133,6 +133,9 @@ COMPRESS_DEBUG_TOGGLE = None
 COMPRESS_ENABLED = False
 COMPRESS_PRECOMPILERS = ()
 
+### For mp-data-manager
+SITE_ID = 1
+
 try:
     from marineplanner.project_settings import *
 except ImportError:

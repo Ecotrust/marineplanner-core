@@ -12,6 +12,9 @@ INSTALLED_APPS += [
 # GEOMETRY_CLIENT_SRID = 3857
 # GEOMETRY_DB_SRID = 3857
 
+### For mp-data-manager:
+SITE_ID = 1
+
 
 #### For mp-accounts:
 # authentication
