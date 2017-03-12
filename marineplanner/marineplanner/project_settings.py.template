@@ -103,3 +103,6 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social.pipeline.debug.debug',
     'accounts.pipeline.clean_session',
 )
+
+DEBUG = True
+ALLOWED_HOSTS = ['localhost']

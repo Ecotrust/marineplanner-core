@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ASSETS_DIR = os.path.realpath(os.path.join(BASE_DIR, '..', 'assets'))
+STYLES_DIR = os.path.realpath(os.path.join(ASSETS_DIR, 'styles'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -128,10 +130,50 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+STATICFILES_DIRS = (
+    STYLES_DIR,
+)
+
 ### Django compressor (mp-visualize/base.html)
-COMPRESS_DEBUG_TOGGLE = None
 COMPRESS_ENABLED = False
-COMPRESS_PRECOMPILERS = ()
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
+COMPRESS_OUTPUT_DIR = 'CACHE'
+COMPRESS_STORAGE = 'compressor.storage.CompressorFileStorage'
+COMPRESS_VERBOSE = False
+COMPRESS_PARSER = 'compressor.parser.AutoSelectParser'
+COMPRESS_DEBUG_TOGGLE = 'None'
+
+COMPRESS_JS_COMPRESSOR = 'compressor.js.JsCompressor'
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+
+COMPRESS_CSS_COMPRESSOR = 'compressor.css.CssCompressor'
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter'
+]
+COMPRESS_CSS_HASHING_METHOD = 'mtime'
+COMPRESS_MTIME_DELAY = 10
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('text/x-sass', 'django_libsass.SassCompiler'),
+    ('text/less', 'lessc {infile} {outfile}'),
+)
+COMPRESS_CACHEABLE_PRECOMPILERS = ()
+
+COMPRESS_CACHE_KEY_FUNCTION = 'compressor.cache.simple_cachekey'
+COMPRESS_CACHE_BACKEND = 'default'
+
+COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE_CONTEXT = {}
+COMPRESS_OFFLINE_MANIFEST = 'manifest.json'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
+]
 
 ### For mp-data-manager
 SITE_ID = 1
