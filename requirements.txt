@@ -1,10 +1,11 @@
-python
+ipython
 ipdb
 django
+psycopg2
 
 # FOR MP-VISUALIZE
 # -e /usr/local/apps/marineplanner-core/apps/mp-visualize
-# 
+#
 #
 ## FOR MADRONA-FEATURES
 ## -e /usr/local/apps/marineplanner-core/apps/madrona-features
