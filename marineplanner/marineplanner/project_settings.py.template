@@ -7,6 +7,18 @@ INSTALLED_APPS += [
 
 ]
 
+# If using postgres user with trust authentication, don't give host, password, or port.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'marineplanner',
+        'USER': 'postgres',
+        # 'HOST': 'localhost',
+        # 'PASSWORD': 'SetInProjectSettings123!',
+        # 'PORT': 5432,
+    }
+}
 
 #### For madrona-features:
 # GEOMETRY_CLIENT_SRID = 3857

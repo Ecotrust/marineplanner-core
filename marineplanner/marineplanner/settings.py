@@ -84,10 +84,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'NAME': 'marineplanner',
-        'USER': 'ubuntu',
-        'HOST': 'localhost',
-        'PASSWORD': 'SetInProjectSettings123!',
-        'PORT': 5432,
+        'USER': 'postgres',
     }
 }
 

@@ -2,6 +2,7 @@ ipython
 ipdb
 django
 psycopg2
+django-compressor
 
 # FOR MP-VISUALIZE
 # -e /usr/local/apps/marineplanner-core/apps/mp-visualize

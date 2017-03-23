@@ -10,6 +10,8 @@ APP_DB_NAME=$3
 PYTHON=$VIRTUALENV_DIR/bin/python
 PIP=$VIRTUALENV_DIR/bin/pip
 
+# USER=ubuntu
+
 # # Dependencies for OpenCV image feature detection
 # apt-get install -y python-opencv python-numpy
 
@@ -41,18 +43,18 @@ echo "setting up virtualenvs"
     # $PIP install -e $PROJECT_DIR/apps/p97settings && \
     # $PIP install -e $PROJECT_DIR/apps/django-recaptcha-develop
 
-echo "workon $PROJECT_NAME" >> /home/ubuntu/.bashrc
+# echo "workon $PROJECT_NAME" >> /home/$USER/.bashrc
 
 echo "resetting DB"
-$PROJECT_DIR/scripts/reset_db $3
+$PROJECT_DIR/scripts/reset_db $APP_DB_NAME #$USER
 
 # Set execute permissions on manage.py as they get lost if we build from a zip file
 chmod a+x $PROJECT_DIR/$APP_NAME/manage.py
 
 # Run syncdb/migrate/update_index
 echo "database syncing and migrations"
-$PYTHON $PROJECT_DIR/$APP_NAME/manage.py migrate --noinput && \
-$PYTHON $PROJECT_DIR/$APP_NAME/manage.py update_index
+$PYTHON $PROJECT_DIR/$APP_NAME/manage.py migrate --noinput #&& \
+# $PYTHON $PROJECT_DIR/$APP_NAME/manage.py update_index
 
 # Load dev fixture
 # echo "loading dev fixture data"

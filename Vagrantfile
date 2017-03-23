@@ -24,9 +24,15 @@ Vagrant::Config.run do |config|
     # folder, and the third is the path on the host to the actual folder.
     config.vm.share_folder "project", "/usr/local/apps/marineplanner-core", "."
 
-    # Enable provisioning with a shell script.
-    #config.vm.provision :shell, :path => "scripts/vagrant_provision.sh", :args => "'PROJECT-NAME' 'APP-NAME' 'DB-NAME'", :privileged => false
-    config.vm.provision :shell, :path => "scripts/vagrant_provision0.sh"
+    ### INSTALL SYSTEM-WIDE DEPENDENCIES
+    ## -- Python, GEOS, Postgresql, PostGIS, GDAL, Proj, etc...
+    # Args: Ubuntu Version, GEOS Version, PostgreSQL Version
+    # Proj Version: '4.9.1'
+    # Proj Datumgrid Version: '1.5'
+    config.vm.provision :shell, :path => "scripts/vagrant_provision0.sh", :args =>"'xenial' '3.5.0' '9.5'"
+
+    ### INSTALL ENVIRONMENT AND SETUP DB
+    # Args: Project Name, Application name, Database name
     config.vm.provision :shell, :path => "scripts/vagrant_provision.sh", :args => "'marineplanner-core' 'marineplanner' 'marineplanner'", :privileged => false
 
     # If a 'Vagrantfile.local' file exists, import any configuration settings
