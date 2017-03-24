@@ -1,7 +1,7 @@
 *.pyc
 .DS_Store
 /.venv/
-/apps/
+/apps/*
 /*/settings/local.py
 /static/
 /media/
@@ -15,6 +15,7 @@ vagrant
 /deps/
 .sass-cache
 node_modules
+/scripts/configure_project.sh
 
 marco_site/static/bundles/
 marco_site/static/css/
