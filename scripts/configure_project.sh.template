@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ### Uncomment the modules you want included in this project:
-
 cd ../apps &&
   echo 'Cloning dependency repositories' &&
   # if [ ! -d madrona-analysistools ]; then git clone https://github.com/Ecotrust/madrona-analysistools.git; fi &&
@@ -22,14 +21,22 @@ cd ../apps &&
   # if [ ! -d django-recaptcha-develop ]; then git clone https://github.com/Ecotrust/django-recaptcha-develop.git; fi &&
   echo 'Done cloning repositories.'
 
-shopt -s nullglob
+shopt -s nullglob #this is important for reasons beyond my comprehension
 cd ../apps/ &&
 modules=(*/) #get list of directories, ignoring __init__.py
-shopt -u nullglob
+shopt -u nullglob #this undoes the important thing done earlier, and is also important
 
+# TODO: Copy vagrantfile template to proper Vagrantfile
+# TODO: Copy urls.py template to proper urls.py
+# TODO: Copy project_settings.py template to proper project_settings.py
 for i in "${modules[@]}"; do
   slash_index=`expr index $i /`
   module_name=${i:0:$slash_index-1}
-  #handle module setup steps here... provision insertion, urls.py updates, module_settings, etc...
+  # TODO: handle module setup steps here...
+  #   - insert module-specific provision scripts into vagrantfile
+  #   - insert module url file imports into urls.py
+  #   - import module setting into top of project_settings.py
+  #   - insert module into INSTALLED_APPS -- maybe in its own settings file
+  #   - etc...
   echo $module_name
 done
