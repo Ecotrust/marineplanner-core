@@ -6,6 +6,7 @@
 /static/
 /media/
 /.vagrant/
+Vagrantfile
 Vagrantfile.local
 vagrant
 *.box
@@ -16,12 +17,8 @@ vagrant
 .sass-cache
 node_modules
 /scripts/configure_project.sh
-
-marco_site/static/bundles/
-marco_site/static/css/
-marco_site/static/fonts/
-marco_site/static/js/
-marco_site/static/bundles/
+/scripts/vagrant_provision.sh
+marineplanner/marineplanner/urls.py
 
 htmlcov
 .idea

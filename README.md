@@ -5,10 +5,18 @@
 ### ~Development Installation
 
 ##### Creating a new app from scratch:
-The steps below are great if you've already created your django project folder and customized the scripts to use it. Going forward, we cannot make these assumptions. The following steps in this section will walk you through this setup.
+* Create a new repository in GitHub (or other)
+* Clone marineplanner-core onto your local system
+* Clone your new repository into the apps folder
+* ... (some work left to do here)
+* Create your new app in the marineplanner-core project:
+* `python manage.py startapp appname`
+* Move your app into your repository folder
+* Make app installable
+* ???
+* Profit
 
-TODO: create a template project to be renamed and acted upon by the provisioning script
-
+=== Old Notes (under construction)===
 1. Rename your template project and app module
 2. Update settings.py with your new db name
 2. Update scripts/vagrant_provision.sh to match your new project, app, and db names

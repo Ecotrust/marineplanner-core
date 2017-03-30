@@ -4,7 +4,8 @@ globals().update(vars(sys.modules['marineplanner.settings']))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 INSTALLED_APPS += [
-
+    ### BEGIN INSERTED INSTALLED APPS ###
+    ### END INSERTED INSTALLED APPS ###
 ]
 
 # If using postgres user with trust authentication, don't give host, password, or port.
