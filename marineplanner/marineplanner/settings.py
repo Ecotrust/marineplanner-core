@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'marineplanner',
+    # 'marineplanner',
     'core',
 ]
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'marineplanner.urls'
+# ROOT_URLCONF = 'marineplanner.urls'
 
 TEMPLATES = [
     {
@@ -171,16 +171,3 @@ STATICFILES_FINDERS = [
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 ]
-
-### For mp-data-manager
-SITE_ID = 1
-
-try:
-    from marineplanner.project_settings import *
-except ImportError:
-    pass
-
-
-# This seems to help with some backward compatibility
-import django
-django.setup()

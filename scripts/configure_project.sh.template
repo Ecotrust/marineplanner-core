@@ -1,11 +1,19 @@
 #!/bin/bash
-
+echo
 ###ALL PATHS SHOULD BE RELATIVE TO marineplanner-core/scripts
 
-### APP_NAME is the name on the application you are developing.
-APP_NAME=$1
 SCRIPTS_DIR=`pwd`
 CORE=${SCRIPTS_DIR%/scripts*}
+core_array=(${CORE//\// })
+PROJECT_NAME=${core_array[-1]}
+
+################################################################################
+#      START PROJECT SPECIFIC CONFIGURATION
+################################################################################
+
+### APP_NAME is the name on the application you are developing.
+# You can either change this line explicitly, or pass the name in as an argument
+APP_NAME=$1
 
 # If you know where you want your django app folder, uncomment and set the line below
 #PROJ_FOLDER=Set_This_Yourself_To_Override
@@ -31,6 +39,12 @@ cd $CORE/apps &&
   # if [ ! -d p97settings ]; then git clone https://github.com/Ecotrust/p97settings.git; fi &&
   # if [ ! -d django-recaptcha-develop ]; then git clone https://github.com/Ecotrust/django-recaptcha-develop.git; fi &&
   echo 'Done cloning repositories.'
+  echo
+
+################################################################################
+#      END PROJECT SPECIFIC CONFIGURATION (you can ignore the rest!)
+################################################################################
+
 cd $CORE/scripts
 
 #Identify best place for project settings file if not specified above
@@ -46,94 +60,88 @@ fi
 
 ### Copy and Link templates to full generated files
 # Generate Vagrantfile
-if [ ! -e $PROJ_FOLDER/Vagrantfile ]; then
-  cp $CORE/Vagrantfile.template $PROJ_FOLDER/Vagrantfile
-fi
+echo Replacing $PROJ_FOLDER/Vagrantfile
+cp $CORE/Vagrantfile.template $PROJ_FOLDER/Vagrantfile
 if [ ! -e $CORE/Vagrantfile ]; then
   ln -s $PROJ_FOLDER/Vagrantfile $CORE/Vagrantfile
 fi
 
 #Generate basic provisoning script
-if [ ! -e $PROJ_FOLDER/vagrant_provision.sh ]; then
-  cp vagrant_provision.sh.template $PROJ_FOLDER/vagrant_provision.sh
-fi
+echo Replacing $PROJ_FOLDER/vagrant_provision.sh
+cp vagrant_provision.sh.template $PROJ_FOLDER/vagrant_provision.sh
 if [ ! -e $SCRIPTS_DIR/vagrant_provision.sh ]; then
   ln -s $PROJ_FOLDER/vagrant_provision.sh $SCRIPTS_DIR/vagrant_provision.sh
 fi
 
 #Generate project urls file
-if [ ! -e $PROJ_FOLDER/proj_urls.py ]; then
-  cp $CORE/marineplanner/marineplanner/urls.py $PROJ_FOLDER/proj_urls.py
-fi
+echo Replacing $PROJ_FOLDER/proj_urls.py
+cp $CORE/marineplanner/marineplanner/urls.py.template $PROJ_FOLDER/proj_urls.py
 if [ ! -e $CORE/marineplanner/marineplanner/urls.py ]; then
   ln -s $PROJ_FOLDER/proj_urls.py $CORE/marineplanner/marineplanner/urls.py
 fi
 
 # $PROJ_SETTINGS=$PROJ_FOLDER/project_settings.py
 #Copy project settings to the project folder to be preserved in its project repository
-if [ ! -e $PROJ_FOLDER/project_settings.py ]; then
-  cp $CORE/marineplanner/marineplanner/project_settings.py.template $PROJ_FOLDER/project_settings.py
-fi
+echo Replacing $PROJ_FOLDER/project_settings.py
+cp $CORE/marineplanner/marineplanner/project_settings.py.template $PROJ_FOLDER/project_settings.py
+
 #Symlink the project settings to be used by MarinePlanner
-if [ ! -e $CORE/marineplanner/marineplanner/project_settings.py ]; then
-  ln -s $PROJ_FOLDER/project_settings.py $CORE/marineplanner/marineplanner/project_settings.py
-fi
+# if [ ! -e $CORE/marineplanner/marineplanner/project_settings.py ]; then
+#   ln -s $PROJ_FOLDER/project_settings.py $CORE/marineplanner/marineplanner/project_settings.py
+# fi
 
 ### Find hooks in generated files to insert content into
 # VAGRANTFILE_INSERT_LINE=`grep -n '### END MODULE PROVISION FILES ###' $CORE/Vagrantfile | cut -f1 -d:`
 # VAGRANTFILE_COLON_INDEX=`expr index $VAGRANTFILE_INSERT_LINE_CONTENT :`
 # VAGRANTFILE_INSERT_LINE=${VAGRANTFILE_INSERT_LINE_CONTENT:0:$VAGRANTFILE_COLON_INDEX-1}
-
-# PROVISION_INSERT_LINE=`grep -n '### END PROJECT PROVISION FILES ###' $SCRIPTS_DIR/vagrant_provision.sh | cut -f1 -d:`
-# PROVISION_COLON_INDEX=`expr index $PROVISION_INSERT_LINE_CONTENT :`
-# PROVISION_INSERT_LINE=${PROVISION_INSERT_LINE_CONTENT:0:$PROVISION_COLON_INDEX-1}
-
-# URLS_INSERT_LINE=`grep -n '### END PROJECT URL INCLUDES ###' $CORE/marineplanner/marineplanner/urls.py | cut -f1 -d:`
-# URLS_COLON_INDEX=`expr index $URLS_INSERT_LINE_CONTENT :`
-# URLS_INSERT_LINE=${URLS_INSERT_LINE_CONTENT:0:$URLS_COLON_INDEX-1}
-
-# APPS_INSERT_LINE=`grep -n '### END INSERTED INSTALLED APPS ###' $CORE/marineplanner/marineplanner/project_settings.py | cut -f1 -d:`
-# APPS_COLON_INDEX=`expr index $APPS_INSERT_LINE_CONTENT :`
-# APPS_INSERT_LINE=${APPS_INSERT_LINE_CONTENT:0:$APPS_COLON_INDEX-1}
+echo
 
 cd $CORE/apps/ &&
+  echo Adding modules:
   for i in `ls -d */ | cut -f1 -d/`; do
-    echo '####'
-    echo $i
-    # slash_index=`expr index $i /`
-    # module_file_name=${i:0:$slash_index-1}
     # INSERT PROVISIONING FILES INTO VAGRANTFILE IF THEY EXIST
-
-    # INSERT COMMAND TO INSTALL APP MODULE INTO PROVISIONING
-    PROVISION_END_LINE="\#\#\# END PROJECT PROVISION FILES \#\#\#"
-    # sed -i 's/$PROVISION_END_LINE/\$PIP install -e \$PROJECT_DIR\/apps\/$i \&\& \n    $PROVISION_END_LINE/' $PROJ_FOLDER/vagrant_provision.sh
-    sed -i 's/$PROVISION_END_LINE/$i\n    $PROVISION_END_LINE/' $PROJ_FOLDER/vagrant_provision.sh
-    echo $?
-
-    setup_file=$CORE/apps/$module_file_name/setup.py
-    if [ -e $setup_file ]; then
-      app_name_line=`grep "packages=['" $setup_file`
-      re="[[:space:]]*packages=\['[^/' ]'\]+'\][[:space:]]*"
-      if [[ $app_name_line =~ $re ]]; then
-        module_name=${BASH_REMATCH[1]}
-        echo MODULE NAME FOUND: $module_name
-        # ADD APP TO URLS
-
-        # ADD APP TO INSTALLED_APPS
-      fi
+    if [ -e $CORE/apps/$i/scripts/vagrant_provision.sh ]; then
+      VAGRANT_PROVISION_END_LINE="\#\#\# END MODULE PROVISION FILES \#\#\#"
+      provision_cmd="config.vm.provision :shell, :path => \"apps\/$i\/scripts\/vagrant_provision.sh\", :args => \"'$PROJECT_NAME'\", :privileged => false"
+      sed -i "s/$VAGRANT_PROVISION_END_LINE/$provision_cmd\n    $VAGRANT_PROVISION_END_LINE/" $PROJ_FOLDER/Vagrantfile
     fi
 
+    setup_file=$CORE/apps/$i/setup.py
+    if [ -e $setup_file ]; then
 
-    # TODO: handle module setup steps here...
-    #   - insert module-specific provision scripts into vagrantfile
-    #   - insert module url file imports into urls.py
-    #   - import module setting into top of project_settings.py
-    #   - insert module into INSTALLED_APPS -- maybe in its own settings file
-    #   - etc...
-    echo $module_file_name
+      # INSERT COMMAND TO INSTALL APP MODULE INTO PROVISIONING
+      PROVISION_END_LINE="\#\#\# END PROJECT PROVISION FILES \#\#\#"
+      install_cmd="\\\$PIP install -e \\\$PROJECT_DIR\/apps\/$i \&\& \\\ "
+      sed -i "s/$PROVISION_END_LINE/$install_cmd\n    $PROVISION_END_LINE/" $PROJ_FOLDER/vagrant_provision.sh
+
+      # GET APP MODULE NAME
+      app_name_line=`grep "packages=\['" $setup_file`
+      if [[ $app_name_line =~ [[:space:]]*packages=\[\'([^/]*)\' ]]; then
+        module_name=${BASH_REMATCH[1]}
+        echo "    $module_name"
+
+        # ADD APP TO INSTALLED_APPS
+        INSTALLED_APPS_END_LINE="\#\#\# END INSERTED INSTALLED APPS \#\#\#"
+        sed -i "s/$INSTALLED_APPS_END_LINE/'$module_name', \n    $INSTALLED_APPS_END_LINE/" $PROJ_FOLDER/project_settings.py
+
+        # ADD APP TO URLS
+        URLS_INCLUDE_END_LINE="\#\#\# END PROJECT URL INCLUDES \#\#\#"
+        sed -i "s/$URLS_INCLUDE_END_LINE/url(r'^$module_name\/', include('$module_name.urls')), \n    $URLS_INCLUDE_END_LINE/" $PROJ_FOLDER/proj_urls.py
+
+        # IMPORT ANY MODULE SETTINGS FILES
+        settings_file=$CORE/apps/$i/$module_name/settings.py
+        if [ -e $settings_file ]; then
+          SETTINGS_IMPORT_END_LINE="\#\#\# END MODULE SETTINGS IMPORT \#\#\#"
+          import_cmd="from $module_name.settings import *"
+          sed -i "s/$SETTINGS_IMPORT_END_LINE/$import_cmd\n    $SETTINGS_IMPORT_END_LINE/" $PROJ_FOLDER/project_settings.py
+        fi
+
+      fi
+    fi
   done
 
-# shopt -s nullglob #this is important for reasons beyond my comprehension
-# cd ../apps/ &&
-# modules=(*/) #get list of directories, ignoring __init__.py
-# shopt -u nullglob #this undoes the important thing done earlier, and is also important
+### import doesn't seem to work on soft links - just copying for now.
+cp $PROJ_FOLDER/project_settings.py $CORE/marineplanner/marineplanner/project_settings.py
+
+echo
+echo done.

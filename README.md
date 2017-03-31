@@ -13,6 +13,13 @@
 * `python manage.py startapp appname`
 * Move your app into your repository folder
 * Make app installable
+* Copy scripts/configure_project.sh.template to scripts/configure_project.sh
+  * Set your explicit project folder if you want one ($CORE/apps/$APP_NAME/marineplanner_files/)
+  * Uncomment the modules you want included
+    * `cd scripts/`
+    * `./configure_project.sh projname` where 'projname' is the name of your project repository
+* `vagrant up`
+* wait while vagrant builds a new VM and provisions it
 * ???
 * Profit
 
