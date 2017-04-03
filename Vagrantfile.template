@@ -45,4 +45,7 @@ Vagrant::Config.run do |config|
     if File.exist? "Vagrantfile.local"
         instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
     end
+
+    config.vm.provision :shell, :path => "scripts/vagrant_finish_provision.sh", :privileged => false
+
 end
