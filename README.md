@@ -18,6 +18,8 @@
   * Uncomment the modules you want included
     * `cd scripts/`
     * `./configure_project.sh projname` where 'projname' is the name of your project repository
+* make configure_project.sh executable
+* run your new configure_project script (may need to open in vim and enter :set fileformat=unix)
 * `vagrant up`
 * wait while vagrant builds a new VM and provisions it
 * ???

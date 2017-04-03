@@ -73,10 +73,10 @@ if [ ! -e $SCRIPTS_DIR/vagrant_provision.sh ]; then
   ln -s $PROJ_FOLDER/vagrant_provision.sh $SCRIPTS_DIR/vagrant_provision.sh
 fi
 
-echo Replacing $PROJ_FOLDER/vagrant_final_provision.sh
-cp vagrant_final_provision.sh.template $PROJ_FOLDER/vagrant_final_provision.sh
-if [ ! -e $SCRIPTS_DIR/vagrant_final_provision.sh ]; then
-  ln -s $PROJ_FOLDER/vagrant_final_provision.sh $SCRIPTS_DIR/vagrant_final_provision.sh
+echo Replacing $PROJ_FOLDER/vagrant_finish_provision.sh
+cp vagrant_finish_provision.sh.template $PROJ_FOLDER/vagrant_finish_provision.sh
+if [ ! -e $SCRIPTS_DIR/vagrant_finish_provision.sh ]; then
+  ln -s $PROJ_FOLDER/vagrant_finish_provision.sh $SCRIPTS_DIR/vagrant_finish_provision.sh
 fi
 
 #Generate project urls file
@@ -141,6 +141,7 @@ cd $CORE/apps/ &&
             sed -i "s/$URLS_INCLUDE_END_LINE/url(r'^account\/', include(account.urls.urls(namespace='account'))), \n    $URLS_INCLUDE_END_LINE/" $PROJ_FOLDER/proj_urls.py
           else
             sed -i "s/$URLS_INCLUDE_END_LINE/url(r'^$module_name\/', include('$module_name.urls')), \n    $URLS_INCLUDE_END_LINE/" $PROJ_FOLDER/proj_urls.py
+          fi
         fi
 
         # IMPORT ANY MODULE SETTINGS FILES
