@@ -46,6 +46,6 @@ Vagrant::Config.run do |config|
         instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
     end
 
-    config.vm.provision :shell, :path => "scripts/vagrant_finish_provision.sh", :privileged => false
+    config.vm.provision :shell, :path => "scripts/vagrant_finish_provision.sh", :args => "'marineplanner-core' 'marineplanner'", :privileged => false
 
 end
