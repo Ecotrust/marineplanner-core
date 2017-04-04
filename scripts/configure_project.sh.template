@@ -73,7 +73,7 @@ cp $CORE/Vagrantfile.template $PROJ_FOLDER/Vagrantfile
 ### local scope during setup.
 sed -i "s/\#\#\#PROJ_DIR\#\#\#/$VAGRANT_PROJ_FOLDER/" $PROJ_FOLDER/Vagrantfile
 if [ ! -e $CORE/Vagrantfile ]; then
-  ln -s $PROJ_FOLDER/Vagrantfile $VAGRANT_CORE/Vagrantfile
+  ln -s $PROJ_FOLDER/Vagrantfile $CORE/Vagrantfile
 fi
 
 #Generate basic provisoning script
