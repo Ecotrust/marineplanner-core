@@ -28,7 +28,7 @@ SECRET_KEY = '-u*-d*&7j=c7a7&k5u6e61b4-t=d8ce^2k=jhox#cn8iy8m_%d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -160,20 +160,35 @@ STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
 
-try:
-    from marineplanner.project_settings import *
-except ImportError:
-    pass
-
-INSTALLED_APPS += [
+### Note: This MUST be set before importing project_settings, even though
+#       INSTALLED_APPS is the first thing project_settings sets.
+#       Because... django? ¯\_(?)_/¯
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'marineplanner',
+    'django.contrib.contenttypes',
+    'marineplanner',
     'core',
     'compressor',
+    ### BEGIN INSERTED INSTALLED APPS ###
+    ### END INSERTED INSTALLED APPS ###
 ]
+
+try:
+    ### START MODULE SETTINGS IMPORT ###
+    ### END MODULE SETTINGS IMPORT ###
+except ImportError:
+    pass
+
+try:
+    from marineplanner.local_settings import *
+except ImportError:
+    pass
+
+# This seems to help with some backward compatibility
+import django
+django.setup()

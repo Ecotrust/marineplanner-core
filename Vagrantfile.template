@@ -33,7 +33,7 @@ Vagrant::Config.run do |config|
 
     ### INSTALL ENVIRONMENT AND SETUP DB
     # Args: Project Name, Application name, Database name
-    config.vm.provision :shell, :path => "scripts/vagrant_provision.sh", :args => "'marineplanner-core' 'marineplanner' 'marineplanner'", :privileged => false
+    config.vm.provision :shell, :path => "scripts/vagrant_provision.sh", :args => "'marineplanner-core' 'marineplanner' 'marineplanner' '###PROJ_DIR###'", :privileged => false
 
     ### INSERT MODULE PROVISION FILES HERE ###
     ### END MODULE PROVISION FILES ###

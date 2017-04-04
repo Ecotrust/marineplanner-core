@@ -4,17 +4,6 @@ import sys, os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-INSTALLED_APPS = [
-    ### BEGIN INSERTED INSTALLED APPS ###
-    ### END INSERTED INSTALLED APPS ###
-]
-
-try:
-    ### START MODULE SETTINGS IMPORT ###
-    ### END MODULE SETTINGS IMPORT ###
-except ImportError:
-    pass
-
 # If using postgres user with trust authentication, don't give host, password, or port.
 DATABASES = {
     'default': {
@@ -30,13 +19,6 @@ DATABASES = {
 
 DEBUG = True
 ALLOWED_HOSTS = ['localhost']
-
-
-# try:
-#     from marineplanner.project_settings import *
-# except ImportError:
-#     pass
-
 
 # This seems to help with some backward compatibility
 import django

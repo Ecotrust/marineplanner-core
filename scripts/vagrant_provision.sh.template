@@ -10,6 +10,11 @@ APP_DB_NAME=$3
 PYTHON=$VIRTUALENV_DIR/bin/python
 PIP=$VIRTUALENV_DIR/bin/pip
 
+MODULE_DIR=$4
+
+`ln -s $MODULE_DIR/proj_urls.py $PROJECT_DIR/$APP_NAME/marineplanner/urls.py`
+`ln -s $MODULE_DIR/project_settings.py $PROJECT_DIR/$APP_NAME/marineplanner/settings.py`
+
 # Virtualenv setup for project
 echo "setting up virtualenvs"
 # /usr/local/bin/virtualenv --system-site-packages $VIRTUALENV_DIR && \
