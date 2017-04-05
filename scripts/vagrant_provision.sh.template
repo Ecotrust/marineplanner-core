@@ -30,7 +30,7 @@ echo "setting up virtualenvs"
     ### END PROJECT PROVISION FILES ###
 
 echo "resetting DB"
-$PROJECT_DIR/scripts/reset_db $APP_DB_NAME #$USER
+$PROJECT_DIR/scripts/reset_db.sh $APP_DB_NAME #$USER
 
 # Set execute permissions on manage.py as they get lost if we build from a zip file
 chmod a+x $PROJECT_DIR/$APP_NAME/manage.py
