@@ -13,12 +13,14 @@
 * wait 30 minutes (or more if you don't have the base box or have a slow connection)
 
 If you have [Vagrant](https://www.vagrantup.com/downloads.html) installed on Mac, Linux, or Unix:
-`git clone https://github.com/Ecotrust/marineplanner-core.git`
-`cd marineplanner-core/scripts`
-`cp configure_project.sh.template configure_project.sh`
-`chmod +x configure_project.sh`
-`./configure_project.sh`
-`vagrant up`
+```bash
+git clone https://github.com/Ecotrust/marineplanner-core.git
+cd marineplanner-core/scripts
+cp configure_project.sh.template configure_project.sh
+chmod +x configure_project.sh
+./configure_project.sh
+vagrant up
+```
 
 ##### Creating a new app from scratch:
 * Create a new repository in GitHub (or other)
