@@ -4,6 +4,14 @@
 
 ### ~Development Installation
 
+##### Bootstrap from scratch:
+* Clone marineplanner-core onto your local system
+* Copy scripts/configure_project.sh.template to scripts/configure_project.sh
+* make configure_project.sh executable
+* run your new configure_project script (may need to open in vim and enter :set fileformat=unix)
+* `vagrant up`
+* wait 30 minutes (or more if you don't have the base box or have a slow connection)
+
 ##### Creating a new app from scratch:
 * Create a new repository in GitHub (or other)
 * Clone marineplanner-core onto your local system
@@ -22,8 +30,6 @@
 * run your new configure_project script (may need to open in vim and enter :set fileformat=unix)
 * `vagrant up`
 * wait while vagrant builds a new VM and provisions it
-* ???
-* Profit
 
 === Old Notes (under construction)===
 1. Rename your template project and app module
