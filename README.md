@@ -65,42 +65,7 @@ Then go [here](http://localhost:8111)
 * wait while vagrant builds a new VM and provisions it
 
 === Old Notes (under construction)===
-1. Rename your template project and app module
-2. Update settings.py with your new db name
-2. Update scripts/vagrant_provision.sh to match your new project, app, and db names
 
-##### Initial Setup using Vagrant:
-The following is the **_recommended_** folder structure for an **entire** Marine Planner project with all associated apps and the customized provisioning script is inherently dependent on it. Altering the folder and naming structure will require modifications to the provisioning script, so please be aware! The provisioning script is designed to be a **one-step** install after initial setup.
-
-```
-  -- marineplanner-core
-    -- apps (all supplemental modules necessary -- see scripts/clone_all.sh for a complete list)
-      -- mardona-analysistools
-      -- madrona-features
-      -- etc.
-```
-
-1.  To quickly clone all of the module repositiories, do the following:
-  * create a directory (like 'apps' above) directly inside marineplanner-core
-  * assuming you named your directory apps, run the following:
-    * `scripts/clone_all.sh ./apps`
-
-2.  Once your folder structure is set up, create a `config.ini` file by making a copy of the `config.ini.template` located at `marineplanner-core/[project]` and modify the following
-      * **MEDIA_ROOT:** /home/vagrant/marineplanner-core/media
-      * **STATIC_ROOT:** /home/vagrant/marineplanner-core/static
-
-3. Create a `/static/` directory at the root level and move the `/bower_components/` directory (also found at the root level) within it
-
-4. TODO: remove this dependency -- Create a `/media/` directory at the root level and retrieve the live server's media folder via ssh/sftp located at `/webapps/[project]_media/` and add it to the `/media/` path. Refer to your team's technical documentation for server login (username and password) credentials
-    * Of note - you may want to exclude the `data_manager` folder within the media directory - unless you're interested in several GBs of utfgrid layers.
-
-5. Retrieve the data & content fixture from `/fixtures/dev_fixture.json` via ssh/sftp and place it at the root level of `marineplanner-core`
-
-6. Download and install [vagrant](https://www.vagrantup.com/downloads.html) and [virtual box](https://www.virtualbox.org/wiki/Downloads) (if you haven't already done so already)
-
-7. At the root of `marineplanner-core`, run `vagrant up` and let it install ALL of dependencies Marine Planner relies upon
-
-8. At this point, you should be completely setup!
 
 9. You probably want to create a superuser once you're in your VM, so that you have access to both the Django and Wagtail backend
 
