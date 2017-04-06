@@ -42,7 +42,7 @@ source env/bin/activate
 cd marineplanner
 python manage.py runserver 0.0.0.0:8000
 ```
-Then go [here](http://localhost:8111)
+Then go [here](http://localhost:8111/visualize)
 
 
 ##### Creating a new app from scratch:
