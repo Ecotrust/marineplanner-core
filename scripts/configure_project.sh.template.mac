@@ -89,7 +89,7 @@ echo Replacing $PROJ_FOLDER/Vagrantfile
 cp $CORE/Vagrantfile.template $PROJ_FOLDER/Vagrantfile
 # This allows us to maintain vagrant scope in the provision scripts, and
 ### local scope during setup.
-sed -i '' 's/\#\#\#PROJ_DIR\#\#\#/$VAGRANT_PROJ_FOLDER/' $PROJ_FOLDER/Vagrantfile
+sed -i '' 's/\#\#\#PROJ_DIR\#\#\#/'"$VAGRANT_PROJ_FOLDER"'/' $PROJ_FOLDER/Vagrantfile
 if [ ! -e $CORE/Vagrantfile ]; then
   ln -s $PROJ_FOLDER/Vagrantfile $CORE/Vagrantfile
 fi
@@ -118,8 +118,13 @@ cd $CORE/apps/
     # INSERT PROVISIONING FILES INTO VAGRANTFILE IF THEY EXIST
     if [ -e $CORE/apps/$i/scripts/vagrant_provision.sh ]; then
       VAGRANT_PROVISION_END_LINE="\#\#\# END MODULE PROVISION FILES \#\#\#"
-      provision_cmd="config.vm.provision \"shell\" do |s|\n      s.path = \"apps\/$i\/scripts\/vagrant_provision.sh\"\n      s.args = \"$PROJECT_NAME\"\n      s.privileged = \"false\"\n    end"
-      sed -i '' 's/$VAGRANT_PROVISION_END_LINE/$provision_cmd\n    $VAGRANT_PROVISION_END_LINE/' $PROJ_FOLDER/Vagrantfile
+      #echo                                       "config.vm.provision \"shell\" do |s|\'$'\n      s.path = \"apps\/$i\/scripts\/vagrant_provision.sh\"\'$'\n      s.args = \"$PROJECT_NAME\"\'$'\n      s.privileged = \"false\"\'$'\n    end"
+      sed -i '' 's/'"$VAGRANT_PROVISION_END_LINE"'/config.vm.provision "shell" do |s|\
+      s.path = "apps\/'"$i"'\/scripts\/vagrant_provision.sh"\
+      s.args = "'"$PROJECT_NAME"'"\
+      s.privileged = "false"\
+    end\
+    '"$VAGRANT_PROVISION_END_LINE"'/' $PROJ_FOLDER/Vagrantfile
     fi
 
     setup_file=$CORE/apps/$i/setup.py
@@ -128,7 +133,7 @@ cd $CORE/apps/
       # INSERT COMMAND TO INSTALL APP MODULE INTO PROVISIONING
       PROVISION_END_LINE="\#\#\# END PROJECT PROVISION FILES \#\#\#"
       install_cmd="\\\$PIP install -e \\\$PROJECT_DIR\/apps\/$i \&\& \\\ "
-      sed -i '' 's/$PROVISION_END_LINE/$install_cmd\n    $PROVISION_END_LINE/' $PROJ_FOLDER/vagrant_provision.sh
+      sed -i '' 's/'"$PROVISION_END_LINE"'/'"$install_cmd"'\'$'\n    '"$PROVISION_END_LINE"'/' $PROJ_FOLDER/vagrant_provision.sh
 
       # GET APP MODULE NAME
       app_name_line=`grep "packages=\['" $setup_file`
@@ -143,7 +148,7 @@ cd $CORE/apps/
           # TODO: Fix mp-drawing
           aaa=1
         else
-          sed -i '' 's/$INSTALLED_APPS_END_LINE/"$module_name", \n    $INSTALLED_APPS_END_LINE/' $PROJ_FOLDER/project_settings.py
+          sed -i '' 's/'"$INSTALLED_APPS_END_LINE"'/"'"$module_name"'", \'$'\n    '"$INSTALLED_APPS_END_LINE"'/' $PROJ_FOLDER/project_settings.py
         fi
 
         if [ -e $PROJ_FOLDER/proj_urls.py ] && [ -e $CORE/apps/$i/$module_name/urls.py ]; then
@@ -152,15 +157,15 @@ cd $CORE/apps/
           URLS_IMPORT_END_LINE="\#\#\# END PROJECT URL IMPORTS \#\#\#"
           ### Accounts module expects 'account' url, also some other quirks I've yet to make fit in the new mold.
           if [ $module_name == accounts ]; then
-            sed -i '' 's/$URLS_IMPORT_END_LINE/import accounts.urls\n$URLS_IMPORT_END_LINE/' $PROJ_FOLDER/proj_urls.py
-            sed -i '' 's/$URLS_INCLUDE_END_LINE/url("^account\/auth\/", include("social.apps.django_app.urls", namespace="social")), \n    $URLS_INCLUDE_END_LINE/' $PROJ_FOLDER/proj_urls.py
-            sed -i '' 's/$URLS_INCLUDE_END_LINE/url(r"^account\/", include("accounts.urls", namespace="account")), \n    $URLS_INCLUDE_END_LINE/' $PROJ_FOLDER/proj_urls.py
+            sed -i '' 's/'"$URLS_IMPORT_END_LINE"'/import accounts.urls\'$'\n'"$URLS_IMPORT_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
+            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url("^account\/auth\/", include("social.apps.django_app.urls", namespace="social")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
+            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^account\/", include("accounts.urls", namespace="account")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
           elif [ $module_name == drawing ]; then
             # Do nothing - drawing is kaputt for now.
             # TODO: Fix mp-drawing
             aaa=1
           else
-            sed -i '' 's/$URLS_INCLUDE_END_LINE/url(r"^$module_name\/", include("$module_name.urls")), \n    $URLS_INCLUDE_END_LINE/' $PROJ_FOLDER/proj_urls.py
+            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^'"$module_name"'\/", include("'"$module_name"'.urls")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
           fi
         fi
 
@@ -169,7 +174,7 @@ cd $CORE/apps/
         if [ -e $settings_file ]; then
           SETTINGS_IMPORT_END_LINE="\#\#\# END MODULE SETTINGS IMPORT \#\#\#"
           import_cmd="from $module_name.settings import *"
-          sed -i '' 's/$SETTINGS_IMPORT_END_LINE/$import_cmd\n    $SETTINGS_IMPORT_END_LINE/' $PROJ_FOLDER/project_settings.py
+          sed -i '' 's/'"$SETTINGS_IMPORT_END_LINE"'/'"$import_cmd"'\'$'\n    '"$SETTINGS_IMPORT_END_LINE"'/' $PROJ_FOLDER/project_settings.py
         fi
 
       fi

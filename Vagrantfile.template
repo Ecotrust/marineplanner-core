@@ -8,12 +8,11 @@ Vagrant.configure(2) do |config|
     config.vm.network "forwarded_port", guest:8000, host:8111
     config.vm.network "forwarded_port", guest:5432, host:65432
 
-    #config.ssh.forward_agent = true
+    config.ssh.insert_key = true
+    config.ssh.forward_agent = true
 
-    #config.vm.share_folder "project", "/usr/local/apps/marineplanner-core", "."
     config.vm.synced_folder ".", "/usr/local/apps/marineplanner-core"
 
-    #config.vm.provision :shell, :path => "scripts/vagrant_provision0.sh", :args =>"'xenial' '3.5.0' '9.5'"
     config.vm.provision "shell" do |s|
       s.path = "scripts/vagrant_provision0.sh"
       s.args = ['xenial', '3.5.0', '9.5']
@@ -38,7 +37,6 @@ Vagrant.configure(2) do |config|
         #instance_eval File.read("Vagrantfile.local"), "Vagrantfile.local"
     #end
 
-    #config.vm.provision :shell, :path => "scripts/vagrant_finish_provision.sh", :args => "'marineplanner-core' 'marineplanner'", :privileged => false
     config.vm.provision "shell" do |s|
       s.path = "scripts/vagrant_finish_provision.sh"
       s.args = ['marineplanner-core', 'marineplanner']
