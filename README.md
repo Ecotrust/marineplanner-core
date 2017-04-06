@@ -34,6 +34,16 @@ chmod +x configure_project.sh
 vagrant up
 ```
 
+###### Run test server
+```bash
+vagrant ssh
+cd /usr/local/apps/marineplanner-core/
+source env/bin/activate
+cd marineplanner
+python manage.py runserver 0.0.0.0:8000
+```
+Then go [here](http://localhost:8111)
+
 
 ##### Creating a new app from scratch:
 * Create a new repository in GitHub (or other)

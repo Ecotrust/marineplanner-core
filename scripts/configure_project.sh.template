@@ -118,7 +118,7 @@ cd $CORE/apps/
     # INSERT PROVISIONING FILES INTO VAGRANTFILE IF THEY EXIST
     if [ -e $CORE/apps/$i/scripts/vagrant_provision.sh ]; then
       VAGRANT_PROVISION_END_LINE="\#\#\# END MODULE PROVISION FILES \#\#\#"
-      provision_cmd="config.vm.provision :shell, :path => \"apps\/$i\/scripts\/vagrant_provision.sh\", :args => \"'$PROJECT_NAME'\", :privileged => false"
+      provision_cmd="config.vm.provision \"shell\" do |s|\n      s.path = \"apps\/$i\/scripts\/vagrant_provision.sh\"\n      s.args = \"$PROJECT_NAME\"\n      s.privileged = \"false\"\n    end"
       sed -i "s/$VAGRANT_PROVISION_END_LINE/$provision_cmd\n    $VAGRANT_PROVISION_END_LINE/" $PROJ_FOLDER/Vagrantfile
     fi
 
