@@ -5,7 +5,7 @@ echo
 SCRIPTS_DIR=`pwd`
 CORE=${SCRIPTS_DIR%/scripts*}
 core_array=(${CORE//\// })
-PROJECT_NAME=${core_array[-1]}
+PROJECT_NAME=${core_array[*]: -1}
 VAGRANT_CORE=\\/usr\\/local\\/apps\\/$PROJECT_NAME
 
 ################################################################################
