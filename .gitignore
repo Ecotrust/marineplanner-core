@@ -31,3 +31,9 @@ dev_fixture.json
 
 /*/project_settings.py
 marineplanner/marineplanner/project_settings.py
+
+#ignore files created by new installation
+env/
+marineplanner/marineplanner/settings.py
+marineplanner/static/
+scripts/ubuntu-xenial-16.04-cloudimg-console.log
