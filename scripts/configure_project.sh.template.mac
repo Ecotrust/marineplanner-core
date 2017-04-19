@@ -167,6 +167,9 @@ cd $CORE/apps/
           else
             sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^'"$module_name"'\/", include("'"$module_name"'.urls")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
           fi
+          if [ $module_name == $APP_NAME ]; then
+            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^$", include("'"$module_name"'.urls")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
+          fi
         fi
 
         # IMPORT ANY MODULE SETTINGS FILES
