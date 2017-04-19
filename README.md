@@ -4,7 +4,7 @@
 
 ### ~Development Installation
 
-##### Bootstrap from scratch:
+#### Vanilla Bootstrap:
 * Clone marineplanner-core onto your local system
 * Copy scripts/configure_project.sh.template to scripts/configure_project.sh
 * make configure_project.sh executable
@@ -48,21 +48,34 @@ Then go [here](http://localhost:8111/visualize)
 ##### Creating a new app from scratch:
 * Create a new repository in GitHub (or other)
 * Clone marineplanner-core onto your local system
-* Clone your new repository into the apps folder
-* ... (some work left to do here)
+* Run the appropriate 'vanilla' bootstrap for your OS
+* `vagrant ssh` into the machine once provisioning is complete
 * Create your new app in the marineplanner-core project:
 * `python manage.py startapp appname`
+* [Make app installable](https://docs.djangoproject.com/en/1.11/intro/reusable-apps/)
+  * this is the hard part
 * Move your app into your repository folder
-* Make app installable
-* Copy scripts/configure_project.sh.template to scripts/configure_project.sh
-  * Set your explicit project folder if you want one ($CORE/apps/$APP_NAME/marineplanner_files/)
-  * Uncomment the modules you want included
-    * `cd scripts/`
-    * `./configure_project.sh projname` where 'projname' is the name of your project repository
-* make configure_project.sh executable
-* run your new configure_project script (may need to open in vim and enter :set fileformat=unix)
-* `vagrant up`
-* wait while vagrant builds a new VM and provisions it
+* check in your new files and push to the remote repository
+* Run the following to close VM, remove old symlinks and reprovision:
+```bash
+exit
+vagrant halt
+### cd into marineplanner-core/scripts if not there already
+rm ../marineplanner/marineplanner/urls.py
+rm ../marineplanner/marineplanner/settings.py
+rm ../Vagrantfile
+rm vagrant_provision.sh
+```
+Then, replacing "[appname]" with the name of your new module:
+`./configure_project.sh [appname]`
+then
+```bash
+vagrant up
+vagrant provision
+```
+
+
+
 
 === Old Notes (under construction)===
 
