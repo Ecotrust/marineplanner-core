@@ -49,9 +49,14 @@ Then go [here](http://localhost:8111/visualize)
 * Create a new repository in GitHub (or other)
 * Clone marineplanner-core onto your local system
 * Run the appropriate 'vanilla' bootstrap for your OS
+  * either include your new git repo's remote url in configure_project.sh or clone it into marineplanner-core/apps/ now.
 * `vagrant ssh` into the machine once provisioning is complete
+* Activate your virtual environment, either using either
+  * `dj`
+  * `source /usr/local/apps/marineplanner-core/env/bin/activate`
 * Create your new app in the marineplanner-core project:
-* `python manage.py startapp appname`
+  * `cd /usr/local/apps/marineplanner-core/marineplanner`
+  * `python manage.py startapp appname`
 * [Make app installable](https://docs.djangoproject.com/en/1.11/intro/reusable-apps/)
   * this is the hard part
 * Move your app into your repository folder
