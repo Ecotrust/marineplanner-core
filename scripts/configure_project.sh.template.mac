@@ -34,8 +34,7 @@ cd $CORE/apps
   if [ $MODULES == "DEFAULT" ]; then
     if [ ! -d madrona-features ]; then git clone https://github.com/Ecotrust/madrona-features.git; fi
     if [ ! -d madrona-manipulators ]; then git clone https://github.com/Ecotrust/madrona-manipulators.git; fi
-    # Drawing is broken currently
-    # if [ ! -d mp-drawing ]; then git clone https://github.com/Ecotrust/mp-drawing.git; fi
+    if [ ! -d mp-drawing ]; then git clone https://github.com/Ecotrust/mp-drawing.git; fi
     if [ ! -d mp-accounts ]; then git clone https://github.com/Ecotrust/mp-accounts.git; fi
     if [ ! -d mp-visualize ]; then git clone https://github.com/Ecotrust/mp-visualize.git; fi
     if [ ! -d mp-data-manager ]; then git clone https://github.com/Ecotrust/mp-data-manager.git; fi
@@ -143,12 +142,9 @@ cd $CORE/apps/
 
         # ADD APP TO INSTALLED_APPS
         INSTALLED_APPS_END_LINE="\#\#\# END INSERTED INSTALLED APPS \#\#\#"
+        sed -i '' 's/'"$INSTALLED_APPS_END_LINE"'/"'"$module_name"'", \'$'\n    '"$INSTALLED_APPS_END_LINE"'/' $PROJ_FOLDER/project_settings.py
         if [ $module_name == drawing ]; then
-          # Do nothing - drawing is kaputt for now.
-          # TODO: Fix mp-drawing
-          aaa=1
-        else
-          sed -i '' 's/'"$INSTALLED_APPS_END_LINE"'/"'"$module_name"'", \'$'\n    '"$INSTALLED_APPS_END_LINE"'/' $PROJ_FOLDER/project_settings.py
+          sed -i '' 's/'"$INSTALLED_APPS_END_LINE"'/"'rpc4django'", \'$'\n    '"$INSTALLED_APPS_END_LINE"'/' $PROJ_FOLDER/project_settings.py
         fi
 
         if [ -e $PROJ_FOLDER/proj_urls.py ] && [ -e $CORE/apps/$i/$module_name/urls.py ]; then
@@ -158,17 +154,14 @@ cd $CORE/apps/
           ### Accounts module expects 'account' url, also some other quirks I've yet to make fit in the new mold.
           if [ $module_name == accounts ]; then
             sed -i '' 's/'"$URLS_IMPORT_END_LINE"'/import accounts.urls\'$'\n'"$URLS_IMPORT_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
-            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url("^account\/auth\/", include("social.apps.django_app.urls", namespace="social")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
+            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^account\/auth\/", include("social.apps.django_app.urls", namespace="social")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
             sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^account\/", include("accounts.urls", namespace="account")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
-          elif [ $module_name == drawing ]; then
-            # Do nothing - drawing is kaputt for now.
-            # TODO: Fix mp-drawing
-            aaa=1
           else
             sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^'"$module_name"'\/", include("'"$module_name"'.urls")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
           fi
           if [ $module_name == $APP_NAME ]; then
-            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/url(r"^$", include("'"$module_name"'.urls")), \'$'\n    '"$URLS_INCLUDE_END_LINE"'/' $PROJ_FOLDER/proj_urls.py
+            #This line needs to be last
+            sed -i '' 's/'"$URLS_INCLUDE_END_LINE"'/'"$URLS_INCLUDE_END_LINE"'\n    url(r"^$", include("'"$module_name"'.urls")), \'$'/' $PROJ_FOLDER/proj_urls.py
           fi
         fi
 
