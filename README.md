@@ -53,32 +53,32 @@ Then go [here](http://localhost:8111/visualize)
 2. Run the appropriate [Development Installation]() bootstrap for your OS
 3. Wait for vagrant to complete
 4. Do one of the following:
-  - **option a**: include your new git repo's remote url in configure_project.sh
-  - **option b**: clone it into marineplanner-core/apps/
+    - **option a**: include your new git repo's remote url in configure_project.sh
+    - **option b**: clone it into marineplanner-core/apps/
 5. `vagrant ssh` into the machine
 6. Activate your virtual environment, using either
-  - **option a**: `dj`
-  - **option b**: `source /usr/local/apps/marineplanner-core/env/bin/activate`
+    - **option a**: `dj`
+    - **option b**: `source /usr/local/apps/marineplanner-core/env/bin/activate`
 7. Create your new app in the marineplanner-core project:
-  * `cd /usr/local/apps/marineplanner-core/marineplanner`
-  * `python manage.py startapp appname` *replace appname with your new app's name*
+    * `cd /usr/local/apps/marineplanner-core/marineplanner`
+    * `python manage.py startapp appname` *replace appname with your new app's name*
 8. [Make app installable](https://docs.djangoproject.com/en/1.11/intro/reusable-apps/)
-  * inside the directory `/apps/YOUR_NEW_APP/` create the following files:
-    - `README.md`
-    - `LICENSE`
-    - `setup.py`
-    - `MANIFEST.in`
-    - `.gitignore`
-  * update `gitignore` with the following:
+    * inside the directory `/apps/YOUR_NEW_APP/` create the following files:
+      - `README.md`
+      - `LICENSE`
+      - `setup.py`
+      - `MANIFEST.in`
+      - `.gitignore`
+    * update `gitignore` with the following:
     ```py
     landmapper.egg-info
     *.pyc    
     .DS_Store
     .idea
     ```
-  * move `/marineplanner-core/marineplanner/YOUR_NEW_PROJECT/` into `/marineplanner-core/apps/YOUR_NEW_APP/`
-  * edit LICENSE file with Ecotrust license
-  * edit setup.py, manifest, and readme as needed
+    * move `/marineplanner-core/marineplanner/YOUR_NEW_PROJECT/` into `/marineplanner-core/apps/YOUR_NEW_APP/`
+    * edit LICENSE file with Ecotrust license
+    * edit setup.py, manifest, and readme as needed
 9. check in your new files, commit, and push to the remote repository *note: make sure you are on the master branch*
 10. Run the following to close VM, remove old symlinks and reprovision:
   ```bash
