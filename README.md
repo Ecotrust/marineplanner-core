@@ -45,41 +45,69 @@ python manage.py runserver 0.0.0.0:8000
 Then go [here](http://localhost:8111/visualize)
 
 
-##### Creating a new app from scratch:
-* Create a new repository in GitHub (or other)
-* Clone marineplanner-core onto your local system
-* Run the appropriate 'vanilla' bootstrap for your OS
-  * either include your new git repo's remote url in configure_project.sh or clone it into marineplanner-core/apps/ now.
-* `vagrant ssh` into the machine once provisioning is complete
-* Activate your virtual environment, either using either
-  * `dj`
-  * `source /usr/local/apps/marineplanner-core/env/bin/activate`
+### Creating a new app from scratch:
+* Create a new repository in GitHub (or other) for the new app your are creating *Note: be empathetic in your name chooses: clearly state your intent*
+* Run the appropriate [Development Installation]() bootstrap for your OS
+* Wait for vagrant to complete
+* Do one of the following:  
+    - **option a**: include your new git repo's remote url in configure_project.sh
+    - **option b**: clone it into marineplanner-core/apps/
+* `vagrant ssh` into the machine
+* Activate your virtual environment, using either
+  - **option a**: `dj`
+  - **option b**: `source /usr/local/apps/marineplanner-core/env/bin/activate`
 * Create your new app in the marineplanner-core project:
   * `cd /usr/local/apps/marineplanner-core/marineplanner`
-  * `python manage.py startapp appname`
+  * `python manage.py startapp appname` *replace appname with your new app's name*
 * [Make app installable](https://docs.djangoproject.com/en/1.11/intro/reusable-apps/)
-  * this is the hard part
-* Move your app into your repository folder
-* check in your new files and push to the remote repository
+  * inside the directory `/apps/YOUR_NEW_APP/` create the following files:
+    - `README.md`
+    - `LICENSE`
+    - `setup.py`
+    - `MANIFEST.in`
+    - `.gitignore`
+  * update ;.gitignore' with the following:
+  
+    ```py
+    landmapper.egg-info
+    *.pyc    
+    .DS_Store
+    .idea
+    ```
+  * move `/marineplanner-core/marineplanner/YOUR_NEW_PROJECT/` into `/marineplanner-core/apps/YOUR_NEW_APP/`
+  * edit LICENSE file with Ecotrust license
+  * edit setup.py, manifest, and readme as needed
+* check in your new files, commit, and push to the remote repository *note: make sure you are on the master branch*
 * Run the following to close VM, remove old symlinks and reprovision:
 ```bash
 exit
 vagrant halt
-### cd into marineplanner-core/scripts if not there already
+```
+* cd into marineplanner-core/scripts if not there already and run:
+```bash
 rm ../marineplanner/marineplanner/urls.py
 rm ../marineplanner/marineplanner/settings.py
 rm ../Vagrantfile
 rm vagrant_provision.sh
 ```
-Then, replacing "[appname]" with the name of your new module:
-`./configure_project.sh [appname]`
-then
+* in the same directory `marineplanner-core/scripts` run the following but replace `appname` with your new module name:
+```bash
+./configure_project.sh appname
+```
+* in the same dir run:
 ```bash
 vagrant up
 vagrant provision
 ```
-
-
+* ssh into VM, start up env, and run server:
+```bash
+vagrant ssh
+cd /usr/local/apps/marineplanner-core/
+source env/bin/activate
+cd marineplanner
+python manage.py runserver 0.0.0.0:8000
+```
+* [open in a browser localhost:8111](http://localhost:8111/)
 
 
 === Old Notes (under construction)===
