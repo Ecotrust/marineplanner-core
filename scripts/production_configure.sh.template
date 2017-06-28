@@ -4,9 +4,6 @@ echo
 
 SCRIPTS_DIR=`pwd`
 CORE=${SCRIPTS_DIR%/scripts*}
-core_array=(${CORE//\// })
-PROJECT_NAME=${core_array[*]: -1}
-# VAGRANT_CORE=\\/usr\\/local\\/apps\\/$PROJECT_NAME
 
 ################################################################################
 #      START PROJECT SPECIFIC CONFIGURATION
@@ -79,28 +76,22 @@ if [ ! -n "$PROJ_FOLDER" ]; then
 fi
 
 echo Linking urls.py
-if [ ! -e $CORE/marineplanner-core/marineplanner/urls.py ]; then
-  ln -s $PROJ_FOLDER/proj_urls.py $CORE/marineplanner-core/marineplanner/urls.py
+if [ ! -e $CORE/marineplanner/marineplanner/urls.py ]; then
+  ln -s $PROJ_FOLDER/proj_urls.py $CORE/marineplanner/marineplanner/urls.py
 fi
 
 echo Linking settings.py
-if [ ! -e $CORE/marineplanner-core/marineplanner/settings.py ]; then
-  ln -s $PROJ_FOLDER/project_settings.py $CORE/marineplanner-core/marineplanner/settings.py
+if [ ! -e $CORE/marineplanner/marineplanner/settings.py ]; then
+  ln -s $PROJ_FOLDER/project_settings.py $CORE/marineplanner/marineplanner/settings.py
 fi
 
 echo Linking Deloyment Scripts
-if [ ! -e $PROJ_FOLDER/vagrant_provision.sh ]; then
-  ln -s $PROJ_FOLDER/vagrant_provision.sh $CORE/marineplanner-core/scripts/vagrant_provision.sh
+if [ ! -e $CORE/scripts/vagrant_provision.sh ]; then
+  ln -s $PROJ_FOLDER/vagrant_provision.sh $CORE/scripts/vagrant_provision.sh
 fi
 
 
 echo Running Deployment Scripts
-if [[ -x "$CORE/scripts/vagrant_provision0.sh" ]]
-then
-  sudo chmod +x $CORE/scripts/vagrant_provision0.sh
-fi
-
-$CORE/scripts/vagrant_provision0.sh xenial 3.5.0 9.5
 
 $CORE/scripts/vagrant_provision.sh marineplanner-core marineplanner marineplanner $CORE
 
@@ -113,9 +104,9 @@ $CORE/apps/mp-drawing/scripts/vagrant_provision.sh marineplanner-core
 $CORE/apps/mp-visualize/scripts/vagrant_provision.sh marineplanner-core
 ### END MODULE PROVISION FILES ###
 
-if [[ -x "$CORE/scripts/vagrant_finish_provision.sh" ]]
+if [[ ! -x "$CORE/scripts/vagrant_finish_provision.sh" ]]
 then
-  sudo chmod +x $CORE/scripts/vagrant_finish_provision.sh
+  sudo -u ubuntu chmod +x $CORE/scripts/vagrant_finish_provision.sh
 fi
 $CORE/scripts/vagrant_finish_provision.sh marineplanner-core marineplanner
 

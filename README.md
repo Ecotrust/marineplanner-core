@@ -56,8 +56,13 @@ This assumes you have built an app to be deployed on mp-core
 6. `cd /usr/local/apps`
 7. `git clone https://github.com/Ecotrust/marineplanner-core.git`
 
+#### Install PostgreSQL/PostGIS and a few Dependencies
+1. `cd /usr/local/apps/marineplanner-core/scripts/`
+2. `sudo chmod +x vagrant_provision0.sh`
+3. `sudo vagrant_provision0.sh xenial 3.5.0 9.5` #Ubuntu xenial, GEOS 3.5.0, PostgreSQL 9.5
+
 #### Installing Your App
-1. `cd marineplanner-core/apps`
+1. `cd /usr/local/apps/marineplanner-core/apps`
 2. `git clone [your mp-core enabled app]`
 3. Kickoff configuration, either:
     * run pre-written deployment script from package, or
