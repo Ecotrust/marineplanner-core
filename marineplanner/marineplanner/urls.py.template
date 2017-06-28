@@ -19,7 +19,7 @@ from django.contrib import admin
 ### END PROJECT URL IMPORTS ###
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/?', admin.site.urls),
     ### INSERT PROJECT URL INCLUDES HERE ###
     ### END PROJECT URL INCLUDES ###
     # url(r'^visualize/', include('visualize.urls')),
