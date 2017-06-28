@@ -44,11 +44,33 @@ python manage.py runserver 0.0.0.0:8000
 ```
 Then go [here](http://localhost:8111/visualize)
 
+
+### ~Stage/Production Installation (Ubuntu LTS)
+This assumes you have built an app to be deployed on mp-core
+#### Initial setup and downloading MP Core
+1. `sudo apt-get update`
+2. `sudo apt-get upgrade`
+3. `sudo apt-get install git`
+4. `mkdir /usr/local/apps`
+5. `sudo chgrp adm /usr/local/apps`
+6. `cd /usr/local/apps`
+7. `git clone https://github.com/Ecotrust/marineplanner-core.git`
+
+#### Installing Your App
+1. `cd marineplanner-core/apps`
+2. `git clone [your mp-core enabled app]`
+3. Kickoff configuration, either:
+    * run pre-written deployment script from package, or
+    * Build configuration from marineplanner-core/scripts/production_configure.sh.template
+
+#### Serving Your App
+* TODO: NGINX, uwsgi, etc...
+
 ***  
 
 ### Creating a new app from scratch:  
 
-1. Create a new repository in GitHub (or other) for the new app your are creating 
+1. Create a new repository in GitHub (or other) for the new app your are creating
   *note: be empathetic in your name chooses: clearly state your intent*
 2. Run the appropriate [Development Installation]() bootstrap for your OS
 3. Wait for vagrant to complete
