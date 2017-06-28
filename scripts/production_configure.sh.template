@@ -108,6 +108,8 @@ $CORE/scripts/vagrant_provision.sh marineplanner-core marineplanner marineplanne
 ### INSERT MODULE PROVISION FILES HERE ###
 $CORE/apps/mp-accounts/scripts/vagrant_provision.sh marineplanner-core
 
+$CORE/apps/mp-drawing/scripts/vagrant_provision.sh marineplanner-core
+
 $CORE/apps/mp-visualize/scripts/vagrant_provision.sh marineplanner-core
 ### END MODULE PROVISION FILES ###
 
