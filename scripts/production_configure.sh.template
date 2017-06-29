@@ -22,12 +22,6 @@ MODULES="DEFAULT"
 cd $CORE/apps
   ### Uncomment the modules you want included in this project, or leave modules as "DEFAULT":
   echo 'Cloning dependency repositories'
-  if [ -n "$APP_NAME" ]; then
-    if [ ! -d $APP_NAME ]; then git clone https://github.com/Ecotrust/$APP_NAME.git; fi
-  else
-    APP_NAME=mp_docs
-    mkdir $CORE/apps/$APP_NAME
-  fi
   if [ $MODULES == "DEFAULT" ]; then
     if [ ! -d madrona-features ]; then git clone https://github.com/Ecotrust/madrona-features.git; fi
     if [ ! -d madrona-manipulators ]; then git clone https://github.com/Ecotrust/madrona-manipulators.git; fi
