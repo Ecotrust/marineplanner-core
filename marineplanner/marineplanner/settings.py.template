@@ -184,6 +184,9 @@ try:
 except ImportError:
     pass
 
+RECAPTCHA_PUBLIC_KEY = 'SiteKey'
+RECAPTCHA_PRIVATE_KEY = 'SetInLocalSettings'
+
 try:
     from marineplanner.local_settings import *
 except ImportError:

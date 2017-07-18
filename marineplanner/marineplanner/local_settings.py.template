@@ -1,6 +1,8 @@
 import sys, os
 #globals().update(vars(sys.modules['marineplanner.settings']))
 
+SECRET_KEY = 'SetInLocalSettings'
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -19,6 +21,8 @@ DATABASES = {
 
 DEBUG = True
 ALLOWED_HOSTS = ['localhost']
+
+RECAPTCHA_PRIVATE_KEY = 'MyRecaptchaPrivateKey456'
 
 # This seems to help with some backward compatibility
 import django
