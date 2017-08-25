@@ -37,7 +37,7 @@ cd $CORE/apps
     APP_NAME=mp_docs
     mkdir $CORE/apps/$APP_NAME
   fi
-  if [ -n "$MOD_NAME" ]; then
+  if [ ! -n "$MOD_NAME" ]; then
     MOD_NAME=$APP_NAME
   fi
   if [ $MODULES == "DEFAULT" ]; then
@@ -120,7 +120,7 @@ if [ ! -e $SCRIPTS_DIR/vagrant_provision.sh ]; then
   ln -s $PROJ_FOLDER/vagrant_provision.sh $SCRIPTS_DIR/vagrant_provision.sh
 fi
 
-if [ ! $EXISTING_PROJECT ]; then
+if [ $EXISTING_PROJECT == false ]; then
   #Generate project urls file
   echo Replacing $PROJ_FOLDER/proj_urls.py
   cp $CORE/marineplanner/marineplanner/urls.py.template $PROJ_FOLDER/proj_urls.py
