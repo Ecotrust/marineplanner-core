@@ -179,6 +179,12 @@ INSTALLED_APPS = [
     ### END INSERTED INSTALLED APPS ###
 ]
 
+# GET_SCENARIOS_URL = '/get_scenarios'
+# SCENARIO_FORM_URL = '/features/scenario/form/'
+# SCENARIO_LINK_BASE = '/features/scenario/app_scenario'
+
+MAP_TECH = 'ol4'
+
 try:
     ### START MODULE SETTINGS IMPORT ###
     ### END MODULE SETTINGS IMPORT ###

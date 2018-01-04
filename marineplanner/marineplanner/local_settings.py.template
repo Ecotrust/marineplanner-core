@@ -24,6 +24,12 @@ ALLOWED_HOSTS = ['localhost']
 
 RECAPTCHA_PRIVATE_KEY = 'MyRecaptchaPrivateKey456'
 
+# GET_SCENARIOS_URL = '/get_scenarios'
+# SCENARIO_FORM_URL = '/features/scenario/form/'
+# SCENARIO_LINK_BASE = '/features/scenario/app_scenario'
+
+MAP_TECH = 'ol4'
+
 # This seems to help with some backward compatibility
 import django
 django.setup()
