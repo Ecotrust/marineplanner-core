@@ -19,7 +19,7 @@ rm -rf $PROJECT_DIR/static/modules
 ### HACKY HACKS!!! (for mp-visualize, mostly)
 echo "Linking static content into static directory"
 if [ ! -e $PROJECT_DIR/$APP_NAME/static/bower_components ]; then
-  ln -s $PROJECT_DIR/bower_components/ $PROJECT_DIR/$APP_NAME/static/bower_components
+  ln -s $PROJECT_DIR/assets/bower_components/ $PROJECT_DIR/$APP_NAME/static/bower_components
 fi
 
 if [ ! -e $PROJECT_DIR/$APP_NAME/static/bundles ]; then
