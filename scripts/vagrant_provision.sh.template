@@ -36,7 +36,7 @@ $PROJECT_DIR/scripts/reset_db.sh $APP_DB_NAME #$USER
 chmod a+x $PROJECT_DIR/$APP_NAME/manage.py
 
 # Add a couple of aliases to manage.py into .bashrc
-cat << EOF >> ~/.bashrc
+cat << EOF >> /etc/bash.bashrc
 alias dj="$PYTHON $PROJECT_DIR/$APP_NAME/manage.py"
 alias djrun="dj runserver 0.0.0.0:8000"
 EOF
