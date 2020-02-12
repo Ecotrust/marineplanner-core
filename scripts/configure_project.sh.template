@@ -23,7 +23,9 @@ MOD_NAME=$2
 EXISTING_PROJECT=false
 
 # "DEFAULT" installs the basic marineplanner modules. You can take more control below
-MODULES="DEFAULT"
+# MODULES="DEFAULT"
+# "DJ2" installed the basic marineplanner modules on branches that have been updated to support Django 2.x
+MODULES="DJ2"
 
 # If you know where you want your django app folder, uncomment and set the line below
 #PROJ_FOLDER=Set_This_Yourself_To_Override
