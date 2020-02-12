@@ -1,6 +1,6 @@
 # Minimal requirements
 Django<1.8
-djangorestframework==3.3.2
+djangorestframework==3.9.1
 
 # django-compressor scss hack
 -e git+https://github.com/MidAtlanticPortal/django-libsass.git@master#egg=django_libsass
