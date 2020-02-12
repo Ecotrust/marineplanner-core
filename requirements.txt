@@ -1,6 +1,6 @@
 ipython
 ipdb
-django<2.0
+django<3.0
 psycopg2-binary
 django-compressor
 
