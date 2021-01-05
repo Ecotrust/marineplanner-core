@@ -14,7 +14,7 @@ POSTGIS_VERSION=$4
 /usr/bin/apt-get install python3-venv python3-dev python3-pip -y
 /usr/bin/apt-get install postgresql-$POSTGRES_VERSION postgresql-server-dev-$POSTGRES_VERSION postgresql-$POSTGRES_VERSION-postgis-$POSTGIS_VERSION postgresql-contrib -y
 # /usr/bin/apt-get install pgadmin3 -y   # Do we really need this?
-/usr/bin/apt-get install binutils libgeos-$GEOS_VER libproj-dev gdal-bin python-gdal -y
+/usr/bin/apt-get install binutils libgeos-$GEOS_VER libproj-dev gdal-bin -y
 sed -i 's/local   all             postgres                                peer/local   all             postgres                                trust/' /etc/postgresql/$POSTGRES_VERSION/main/pg_hba.conf
 /usr/sbin/service postgresql restart
 
