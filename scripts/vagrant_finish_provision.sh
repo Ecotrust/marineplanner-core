@@ -27,5 +27,5 @@ if [ ! -e $PROJECT_DIR/$APP_NAME/static/bundles ]; then
 fi
 ### END HACKY HACKS
 
-echo "Compressing Files"
-$PYTHON $PROJECT_DIR/$APP_NAME/manage.py compress
+# echo "Compressing Files"
+# $PYTHON $PROJECT_DIR/$APP_NAME/manage.py compress -f
