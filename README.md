@@ -59,7 +59,7 @@ This assumes you have built an app to be deployed on mp-core
 #### Install PostgreSQL/PostGIS and a few Dependencies
 1. `cd /usr/local/apps/marineplanner-core/scripts/`
 2. `sudo chmod +x vagrant_provision0.sh`
-3. `sudo vagrant_provision0.sh xenial 3.5.0 9.5` #Ubuntu xenial, GEOS 3.5.0, PostgreSQL 9.5
+3. `sudo ./vagrant_provision0.sh focal 3.8.0 12 3` #Ubuntu focal, GEOS 3.8.0, PostgreSQL 12, PostGIS 3
 
 #### Installing Your App
 1. `cd /usr/local/apps/marineplanner-core/apps`
