@@ -10,7 +10,7 @@ djangorestframework==3.11.2
 libsass==0.5.1
 
 django-modelcluster==0.6.2
-wagtail==2.11.8
+wagtail==4.1.4
 
 # Recommended components (require additional setup):
 psycopg2==2.5.2
