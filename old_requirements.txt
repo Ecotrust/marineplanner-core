@@ -26,7 +26,7 @@ django-celery
 django-celery-email
 kombu
 
-requests==2.20.0
+requests==2.31.0
 
 django-apptemplates
 
